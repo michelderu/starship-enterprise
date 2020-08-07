@@ -1,1 +1,0 @@
-ASTRA_AUTHORIZATION_TOKEN=8ff1c6cd-f2fc-4523-ace0-7cab7dcce5d6
