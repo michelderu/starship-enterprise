@@ -1,0 +1,8 @@
+.DS_Store
+.tmp
+.classpath
+.project
+.settings/
+.vscode/
+astra_credentials.txt
+astra_token.txt
