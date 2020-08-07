@@ -1,4 +1,5 @@
 source astra_environment.txt
+source astra_token.txt
 
 #CREATE TABLE IF NOT EXISTS oxigen_filter_sensor (
 #  	name text,

@@ -12,16 +12,27 @@
 
 ### Set up the database on Astra
 Point the browser to https://astra.datastax.com and create a new database
-- Database name: starship_enterprise
-- Keyspace: life_support_systems
+- Database name: starship_enterprise;
+- Keyspace: life_support_systems.
 Note the cluster ID for follow up actions.
 
+### Set up the environment variables
+Edit `astra/astra-environment.txt` to match the Astra Cluster ID and Region.
+
 ### Get the Authorization Token for REST activities
-Update the ASTRA_ variables in `astra/getAuthToken.sh` and run it. Note the token in the response.
+Create a file `astra/astra_credentials.txt` that contains the username and password as such:
+```sh
+ASTRA_DB_USERNAME=<your username>
+ASTRA_DB_PASSWORD=<your password>
+```
+Now run `astra/getAuthToken.sh`. Note the token in the response, we'll need it for the step below and for the JMeter simulation.
+Create a file `astra/astra_token.txt` that contains the token as such:
+```sh
+ASTRA_AUTHORIZATION_TOKEN=<your token>
+```
 
 ### Create the needed tables
-Update the ASTRA_ variables in `astra/astra_environment.txt` and make sure to include the retrieved Authorization Token.
-Then run `astra/createTables.sh`.
+Run `astra/createTables.sh`.
 This will create the oxygen_filter table that accepts information from the oxygen IOT sensor.
 
 ### Add a test row into the table
