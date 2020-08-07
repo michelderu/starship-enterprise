@@ -45,9 +45,9 @@ Update the Authorization Token in the Astra REST headers section (x-cassandra-to
 Hit the run button to start the simulation that loads IOT data into Astra.  
 
 #### IOT data generation
-In 95% of the time we generate a normal O value of 18-22, the other 5% we generate outliers from 14-18.
-For the flow value, in 95% of the time we generate a normal value of 4-5, the other 5% we generate outliers from 2-3.
-One IOT data point per second is generated as follows in the JMeter HTTP thread definition:
+In 95% of the time we generate a normal O value of 18-22, the other 5% we generate outliers from 14-18.  
+For the flow value, in 95% of the time we generate a normal value of 4-5, the other 5% we generate outliers from 2-3.  
+One IOT data point per second is generated as follows in the JMeter HTTP thread definition:  
 ```json
 {"columns":[
   {"name":"name","value":"main_scrubber"},

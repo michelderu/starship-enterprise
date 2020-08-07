@@ -4,5 +4,5 @@
 .project
 .settings/
 .vscode/
-astra_credentials.txt
-astra_token.txt
+astra/astra_credentials.txt
+astra/astra_token.txt
