@@ -17,7 +17,7 @@ Point the browser to https://astra.datastax.com and create a new database
 Note the cluster ID for follow up actions.
 
 ### Set up the environment variables
-Edit `astra/astra-environment.txt` to match the Astra Cluster ID and Region.
+Edit `astra/astra_environment.txt` to match the Astra Cluster ID and Region.
 
 ### Get the Authorization Token for REST activities
 Create a file `astra/astra_credentials.txt` that contains the username and password as such:
@@ -25,7 +25,7 @@ Create a file `astra/astra_credentials.txt` that contains the username and passw
 ASTRA_DB_USERNAME=<your username>
 ASTRA_DB_PASSWORD=<your password>
 ```
-Now run `astra/getAuthToken.sh`. Note the token in the response, we'll need it for the step below and for the JMeter simulation.
+Now run `astra/getAuthToken.sh`. Note the token in the response, we'll need it for the step below and for the JMeter simulation.  
 Create a file `astra/astra_token.txt` that contains the token as such:
 ```sh
 ASTRA_AUTHORIZATION_TOKEN=<your token>
@@ -39,10 +39,10 @@ This will create the oxygen_filter table that accepts information from the oxyge
 Run `astra/addRows.sh`.
 
 ### Spin up JMeter and hit the rows endpoint to load IOT data
-In this demo we'll use JMeter to simulate a data feed coming from an oxygen level sensor in the filter room of the life support system in the space ship.
-Run `apache-jmeter-5.3/bin/jmeter.sh` and load `Oxygen Filter Simulation.jmx`.
-Update the Authorization Token in the Astra REST headers section (x-cassandra-token).
-Hit the run button to start the simulation that loads IOT data into Astra.
+In this demo we'll use JMeter to simulate a data feed coming from an oxygen level sensor in the filter room of the life support system in the space ship.  
+Run `apache-jmeter-5.3/bin/jmeter.sh` and load `Oxygen Filter Simulation.jmx`.  
+Update the Authorization Token in the Astra REST headers section (x-cassandra-token).  
+Hit the run button to start the simulation that loads IOT data into Astra.  
 
 #### IOT data generation
 In 95% of the time we generate a normal O value of 18-22, the other 5% we generate outliers from 14-18.
