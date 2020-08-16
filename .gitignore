@@ -6,7 +6,7 @@
 .vscode/
 .serverless/
 node_modules/
-astra/astra_credentials.txt
-astra/astra_token.txt
-aws-monitoring/serverless_credentials.csv
+astra_credentials.txt
+astra_token.txt
+serverless_credentials.csv
 secure-connect-starship-enterprise.zip
