@@ -1,14 +1,13 @@
 # Starship Enterprise IOT Demo
-Welcome at the Starship Enterprise Fleet!  
-You're the Safety Manager responsible for the safety of all personnel.  
-The single most important safety issue is the quality of oxygen.  No oxygen == No people!  
-In order to maximise safety on each ship an extensive monitoring system has been implemented by you for life support.  
-This monitoring system takes information from thousands of systems and stores it securely in a scalable Cassandra architecture. Cassandra has been choosen because of it's zero-downtime capabilities and it's lightning fast write operations allowing for secure storage of all measurements of all IOT sensors.  
+Welcome to the Starship Enterprise Fleet! And congratulations, you're the Safety Manager responsible for the safety of all personnel.  
+The single most important safety issue is the quality of oxygen. No oxygen == No people!  
+In order to maximise safety on each ship an extensive monitoring system has been implemented by you for life support. This monitoring system takes information from thousands of systems and stores it securely in a scalable Cassandra architecture.  
+Cassandra has been choosen because of it's zero-downtime capabilities and it's lightning fast write operations allowing for secure storage of all measurements of all IOT sensors.  
 
 ## Components in the demo
 ### Database
 The database being used is deployed on the Astra SaaS offering because of:
-- No Ops
+- No Ops, just use it in a serverless fashion!
 - Cloud native
 - Zero lock-in
 - Global (Universal in our case!) scale
@@ -20,7 +19,7 @@ For this type of IOT data we utilize JMeter serving as an IOT sensor simulator s
 ### Monitoring
 Once we have measurements, it's time to start monitoring.  
 In our situation, we have decided to monitor for outliers during a roling window of one minute.  
-Normal oxygen levels measure 18-22 ppm. Everything from 14-17 ppm activates an alert event.
+Normal oxygen levels measure 18-22 ppm. Everything below 17 ppm activates an alert event.
 
 ### Alerting
 Because the maintenance personnel is very actively working throughout the whole ship, we have to make sure they get alerted as soon as action has to be taken. 
@@ -28,10 +27,10 @@ Because the maintenance personnel is very actively working throughout the whole 
 To keep in-line with the cloud-based Astra solution, we utlize the following cloud-native solutions on AWS:
 - Lambda functions to create a true severless application.
 - Additionally the Simple Notification Service from AWS is used to inform service employees.
-- Finally Lambda Scheduled Events to run the service every minute.
+- Finally Lambda Scheduled Events to run the service every minute.  
 In order to package the application nicely in a devops environment https://serverless.com has been used.
 #### Python app
-For reference, and showing the flexibility of the Datastax platforn, there is also a Python app that monitors the sensor information.
+For reference, and showing the flexibility of the Datastax platform, there is also a Python app that monitors the sensor information and triggers alerts when needed.
 
 ## Data model design
 ### Keyspace
@@ -59,6 +58,8 @@ CREATE TABLE IF NOT EXISTS sensor_data (
   PRIMARY KEY ((yyyymmddhhmm, ship, sensor), oxygen)
 ) WITH CLUSTERING ORDER BY (oxygen ASC);
 ```
+The primary key consists of the combined attributes `yyyymmddhhmm`, `ship` and `sensor` to be able to find the relevant data quickly as this data will be stored on one partition. Additionally we place a clustering key on `oxygen` in ascending order so that the data gets sorted. This allows to limit the results to the first row, again speeding up the read activity, because the first row will contain the lowest value for `oxygen`.
+
 ### Query
 We want to quickly know if there is an outlier during the last rolling window of a minute. The easiest way to do this is utilizing the partition keys and clustering key.
 ```sql
@@ -68,7 +69,7 @@ LIMIT 1;
 ```
 This will retrieve all oxygen reading from the current rolling minut window, with the oxygen value sorted in an ascending order. So the smallest value will be first, easily allowing to check if it's < 18. Limiting to 1 gives us the number we're interested in.
 
-## Experience during development
+## Some personal notes: Experience during development
 1. Repeatedly receieved 500 errors call REST endpoints, even after creating a new Astra DB
 2. No extended logging information available apart from REST responses saying little (i.e.: "unable to execute create table query" with error code 500)
 3. Reached out to Astra support (Sebastian) who is now helping me
@@ -80,7 +81,7 @@ This will retrieve all oxygen reading from the current rolling minut window, wit
 All activities are relative to the `./astra` directory!
 
 ### Set up the database on Astra
-Point the browser to https://astra.datastax.com and create a new database
+Point your browser to https://astra.datastax.com and create a new database
 - Database name: starship_enterprise;
 - Keyspace: life_support_systems.
 Note the cluster ID for follow up actions.
@@ -96,20 +97,21 @@ export ASTRA_DB_PASSWORD=<your password>
 ```
 Now run `./getAuthToken.sh`.  
 Note the token in the response, we'll need it for the step below and for the JMeter simulation.  
+  
 Create a file `astra_token.txt` that contains the token as such:
 ```sh
 ASTRA_AUTHORIZATION_TOKEN=<your token>
 ```
 
 ### Create the needed tables
-Run: `./createTables.sh`.  
+Run: `./createTables.sh`. Take a look at the embedded REST call.  
 This will create the oxygen_filter table that accepts information from the oxygen IOT sensor.
 
 ### Add some test rows into the table
-Run: `./addRows.sh`.
+Run: `./addRows.sh`. Take a look at the embedded REST call.
 
 ### Test querying the sensor table
-Run: `./query.sh`.
+Run: `./query.sh`. Take a look at the embedded REST call.
 
 ## Simulate the oxygen IOT device
 
@@ -138,7 +140,7 @@ Run `apache-jmeter-5.3/bin/jmeter.sh` and load `Oxygen Filter Simulation.jmx`.
 Hit the run button to start the simulation that loads IOT data into Astra. JMeter will ingest a value every second for a period of 5 minutes (enough for testing).
 
 ## Python Monitoring App
-All activities are relative to the `./python-monitor` directory!
+All activities are relative to the `./python-monitoring` directory!
 
 ### Design
 Credentials are taken from the `./astra/credentials.txt` file.  
@@ -147,7 +149,7 @@ Every 5 seconds the app checks if there is an outlier in the oxygen values for t
 The query we use is documented above. Whenever we retrieve a value that is smaller than 18, an alert goes off.
 
 ### Run the IOT monitoring process
-First download the secure connect bundle from Astra and place the zip in `./python-monitor`. Make sure to update the filename in environment variable `ASTRA_SECURE_CONNECT_BUNDLE` in `run_monitoring.sh`.  
+First download the secure connect bundle from Astra and place the zip in `./python-monitoring`. Make sure to update the filename in environment variable `ASTRA_SECURE_CONNECT_BUNDLE` in `run_monitoring.sh`.  
 Then make sure your Astra credentials are correctly stored in `./astra/credentials.txt`. 
 Now install the cassandra driver: `pip3 install cassandra-driver`.  
 Optional: Check the cassandra driver availability: `python3 -c 'import cassandra; print (cassandra.__version__)'`.  
@@ -155,7 +157,7 @@ Make sure JMeter is firing the endpoint to simulate the oxygen sensor.
 Now run `run_monitoring.sh`.
 
 ## AWS cloud-native Monitoring App
-All activities are relative to the `./aws-monitor` directory!
+All activities are relative to the `./aws-monitoring` directory!
 
 ### Design
 The cloud-native solutions uses a full serverless design. No need for standing up nodes anymore!  
@@ -167,10 +169,10 @@ To ease the devops process, we make use of the wunderful https://serverless.com 
 3. Configure serverless credentials like `serverless config credentials --provider aws --key <KEY> --secret <SECRET>`.
 4. Go to AWS and create an S3 bucket (make sure to use the same region).
 5. Configure the region and bucket in serverless.yml.
-6. Download the secure connect bundle fro Astra and put the zip into the `aws-monitor` directory so it will be packaged.
+6. Download the secure connect bundle fro Astra and put the zip into the `aws-monitoring` directory so it will be packaged.
 7. Install Node.js dependencies
 ```sh
-cd aws-monitor
+cd aws-monitoring
 npm install cassandra-driver
 npm install aws-sdk
 ```
