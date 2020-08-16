@@ -138,7 +138,7 @@ Run `apache-jmeter-5.3/bin/jmeter.sh` and load `Oxygen Filter Simulation.jmx`.
 Hit the run button to start the simulation that loads IOT data into Astra. JMeter will ingest a value every second for a period of 5 minutes (enough for testing).
 
 ## Python Monitoring App
-All activities are relative to the `./monitor` directory!
+All activities are relative to the `./python-monitor` directory!
 
 ### Design
 Credentials are taken from the `./astra/credentials.txt` file.  
@@ -147,7 +147,7 @@ Every 5 seconds the app checks if there is an outlier in the oxygen values for t
 The query we use is documented above. Whenever we retrieve a value that is smaller than 18, an alert goes off.
 
 ### Run the IOT monitoring process
-First download the secure connect bundle from Astra and place the zip in `./monitor`. Make sure to update the filename in environment variable `ASTRA_SECURE_CONNECT_BUNDLE` in `run_monitoring.sh`.  
+First download the secure connect bundle from Astra and place the zip in `./python-monitor`. Make sure to update the filename in environment variable `ASTRA_SECURE_CONNECT_BUNDLE` in `run_monitoring.sh`.  
 Then make sure your Astra credentials are correctly stored in `./astra/credentials.txt`. 
 Now install the cassandra driver: `pip3 install cassandra-driver`.  
 Optional: Check the cassandra driver availability: `python3 -c 'import cassandra; print (cassandra.__version__)'`.  
@@ -155,7 +155,7 @@ Make sure JMeter is firing the endpoint to simulate the oxygen sensor.
 Now run `run_monitoring.sh`.
 
 ## AWS cloud-native Monitoring App
-All activities are relative to the `./aws-monitoring` directory!
+All activities are relative to the `./aws-monitor` directory!
 
 ### Design
 The cloud-native solutions uses a full serverless design. No need for standing up nodes anymore!  
@@ -167,10 +167,10 @@ To ease the devops process, we make use of the wunderful https://serverless.com 
 3. Configure serverless credentials like `serverless config credentials --provider aws --key <KEY> --secret <SECRET>`.
 4. Go to AWS and create an S3 bucket (make sure to use the same region).
 5. Configure the region and bucket in serverless.yml.
-6. Download the secure connect bundle fro Astra and put the zip into the `aws-lambda-monitor` directory so it will be packaged.
+6. Download the secure connect bundle fro Astra and put the zip into the `aws-monitor` directory so it will be packaged.
 7. Install Node.js dependencies
 ```sh
-cd aws-lambda-monitor
+cd aws-monitor
 npm install cassandra-driver
 npm install aws-sdk
 ```
