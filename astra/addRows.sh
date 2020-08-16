@@ -21,8 +21,7 @@ curl -w " %{http_code}" --request POST \
   {"name":"updated","value":"2020-08-16 12:10:31.020"},
   {"name":"ship","value":"Starship Astra"},
   {"name":"sensor","value":"oxygen"},
-  {"name":"oxygen","value":18},
-  {"name":"flow","value":5}
+  {"name":"reading","value":18}
   ]}'
 
 echo
@@ -39,8 +38,7 @@ curl -w " %{http_code}" --request POST \
   {"name":"updated","value":"2020-08-16 12:10:31.020"},
   {"name":"ship","value":"Starship Astra"},
   {"name":"sensor","value":"oxygen"},
-  {"name":"oxygen","value":20},
-  {"name":"flow","value":5}
+  {"name":"reading","value":20}
   ]}'
 
 echo
@@ -57,8 +55,7 @@ curl -w " %{http_code}" --request POST \
   {"name":"updated","value":"2020-08-16 12:10:31.020"},
   {"name":"ship","value":"Starship Astra"},
   {"name":"sensor","value":"oxygen"},
-  {"name":"oxygen","value":17},
-  {"name":"flow","value":5}
+  {"name":"reading","value":17}
   ]}'
 
 echo

@@ -54,17 +54,16 @@ const createTable = `CREATE TABLE IF NOT EXISTS ${keyspace}.${table} (` +
                     `updated timestamp,` +
                     `ship text,` +
                     `sensor text,` +
-                    `oxygen int,` +
-                    `flow int,` +
-                    `PRIMARY KEY ((yyyymmddhhmm, ship, sensor), oxygen)` +
-                    `) WITH CLUSTERING ORDER BY (oxygen ASC);`;
+                    `reading int,` +
+                    `PRIMARY KEY ((yyyymmddhhmm, ship, sensor), reading)` +
+                    `) WITH CLUSTERING ORDER BY (reading ASC);`;
 
-const writeQuery = `INSERT INTO ${keyspace}.${table} (yyyymmddhhmm, updated, ship, sensor, oxygen, flow) VALUES (?, ?, ?, ?, ?, ?)`;
+const writeQuery = `INSERT INTO ${keyspace}.${table} (yyyymmddhhmm, updated, ship, sensor, reading) VALUES (?, ?, ?, ?, ?)`;
 
-const minuteQuery = `SELECT oxygen FROM ${keyspace}.${table} ` +
+const minuteQuery = `SELECT reading FROM ${keyspace}.${table} ` +
                     `WHERE yyyymmddhhmm = ? AND ship = ? AND sensor = ? `;
 
-const monitorQuery = `SELECT oxygen FROM ${keyspace}.${table} ` +
+const monitorQuery = `SELECT reading FROM ${keyspace}.${table} ` +
                      `WHERE yyyymmddhhmm = ? AND ship = ? AND sensor = ? ` +
                      `LIMIT 1;`;
 
@@ -80,8 +79,8 @@ async function createSchema() {
 }
 
 // Add data to the table
-async function addSensorReading(yyyymmddhhmm, updated, ship, sensor, oxygen, flow) {
-  const params = [ yyyymmddhhmm, updated, ship, sensor, oxygen, flow ];
+async function addSensorReading(yyyymmddhhmm, updated, ship, sensor, reading) {
+  const params = [ yyyymmddhhmm, updated, ship, sensor, reading ];
   await client.execute(writeQuery, params, { prepare: true, isIdempotent: true });
   return {
     statusCode: 200,
@@ -91,8 +90,7 @@ async function addSensorReading(yyyymmddhhmm, updated, ship, sensor, oxygen, flo
       updated: updated,
       ship: ship,
       sensor: sensor,
-      oxygen: oxygen,
-      flow: flow
+      reading: reading
       })
   };
 }
@@ -105,7 +103,7 @@ async function getReading(yyyymmddhhmm, ship, sensor) {
     statusCode: 200,
     body: JSON.stringify({
       query: minuteQuery,
-      oxygen: row.oxygen
+      reading: row.reading
     })
   };
 }
@@ -150,17 +148,17 @@ async function monitorOxygen() {
   const result = await client.execute(monitorQuery, params, { prepare : true });
   if (result.first()) {
     console.log ("Value", result);
-    const oxygen = result.first().oxygen;
+    const oxygen = result.first().reading;
     if (oxygen < 18) {
-      console.log ("Alert! Oxygen value", oxygen, "below threshold of 18");
-      const response = await sendSMS (monitorSMSNumber, "Starship", "Alert! Oxygen value below threshold. Immediate action required!");
+      console.log ("Alert! Oxygen value", oxygen, "below threshold of 18 ppm. Immediate action required!");
+      const response = await sendSMS (monitorSMSNumber, "Starship", "Alert! Oxygen value below threshold of 18 ppm. Immediate action required!");
       return {
         statusCode: 200,
         body: JSON.stringify({
           query: monitorQuery,
           alert: "Alert!",
           yyyymmddhhmm: yyyymmddhhmm,
-          oxygen: oxygen
+          reading: oxygen
         })
       };
     } else {
@@ -171,7 +169,7 @@ async function monitorOxygen() {
           query: monitorQuery,
           alert: "Normal!",
           yyyymmddhhmm: yyyymmddhhmm,
-          oxygen: oxygen
+          reading: oxygen
         })
       };
     }
@@ -195,7 +193,7 @@ module.exports.createSchema = async (event) => {
 module.exports.addSensorReading = async (event) => {
   console.log('timeuuid in addSensorReading: ' + myuuid);
   const data = JSON.parse(event.body);
-  return addSensorReading(data.yyyymmddhhmm, data.updated, data.ship, data.sensor, data.oxygen, data.flow);
+  return addSensorReading(data.yyyymmddhhmm, data.updated, data.ship, data.sensor, data.reading);
 };
 
 module.exports.getReading = async (event) => {

@@ -42,7 +42,7 @@
             </elementProp>
             <elementProp name="" elementType="Header">
               <stringProp name="Header.name">x-cassandra-token</stringProp>
-              <stringProp name="Header.value">34a2371b-a89c-4041-8c17-241bce9fb5a6</stringProp>
+              <stringProp name="Header.value">1eb01e12-a76f-40e6-9e94-aaf1b4434478</stringProp>
             </elementProp>
           </collectionProp>
         </HeaderManager>
@@ -55,13 +55,13 @@
                 <boolProp name="HTTPArgument.always_encode">false</boolProp>
                 <stringProp name="Argument.value">${__setProperty(time, ${__time(yyyy-MM-dd HH:mm:ss.S)}, False)}&#xd;
 ${__setProperty(yyyymmddhhmm, ${__time(yyyyMMddHHmm)}, False)}&#xd;
+&#xd;
 {&quot;columns&quot;:[&#xd;
   {&quot;name&quot;:&quot;yyyymmddhhmm&quot;,&quot;value&quot;:&quot;${__P(yyyymmddhhmm)}&quot;},&#xd;
   {&quot;name&quot;:&quot;updated&quot;,&quot;value&quot;:&quot;${__P(time)}&quot;},&#xd;
   {&quot;name&quot;:&quot;ship&quot;,&quot;value&quot;:&quot;Starship Astra&quot;},&#xd;
   {&quot;name&quot;:&quot;sensor&quot;,&quot;value&quot;:&quot;oxygen&quot;},&#xd;
-  {&quot;name&quot;:&quot;oxygen&quot;,&quot;value&quot;:${__javaScript(${__Random(0,100)} &gt; 98 ? ${__Random(14,17)} : ${__Random(18,22)})}},&#xd;
-  {&quot;name&quot;:&quot;flow&quot;,&quot;value&quot;:${__javaScript(${__Random(0,100)} &gt; 95 ? ${__Random(2,3)} : ${__Random(4,5)})}}&#xd;
+  {&quot;name&quot;:&quot;reading&quot;,&quot;value&quot;:${__javaScript(${__Random(0,100)} &gt; 98 ? ${__Random(14,17)} : ${__Random(18,22)})}}&#xd;
 ]}</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
               </elementProp>

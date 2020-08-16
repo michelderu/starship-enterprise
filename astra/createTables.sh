@@ -37,10 +37,9 @@ curl -w "%{http_code}" --request POST \
             {"name":"updated", "typeDefinition":"timestamp", "static":false}, 
             {"name":"ship", "typeDefinition":"text", "static":false}, 
             {"name":"sensor", "typeDefinition":"text", "static":false}, 
-            {"name":"oxygen", "typeDefinition":"int", "static":false}, 
-            {"name":"flow", "typeDefinition":"int", "static":false}
+            {"name":"reading", "typeDefinition":"int", "static":false}
         ],
-        "primaryKey": {"partitionKey":["yyyymmddhhmm", "ship", "sensor"], "clusteringKey":["oxygen"]},
+        "primaryKey": {"partitionKey":["yyyymmddhhmm", "ship", "sensor"], "clusteringKey":["reading"]},
         "tableOptions":{"defaultTimeToLive":0}
     }'
 

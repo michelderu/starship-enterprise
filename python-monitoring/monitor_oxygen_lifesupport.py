@@ -29,15 +29,15 @@ def checkOxygenLevels():
     print ("Checking oxygen levels in the rolling minute window", yyyymmddhhmm)
 
     rows = session.execute("\
-        SELECT oxygen FROM life_support_systems.sensor_data \
+        SELECT reading FROM life_support_systems.sensor_data \
         WHERE yyyymmddhhmm = '" + yyyymmddhhmm + "' AND ship = 'Starship Astra' and sensor = 'oxygen' \
         LIMIT 1; \
     ")
 
     if rows.one():
-        oxygen = rows.one().oxygen
+        oxygen = rows.one().reading
         if oxygen < 18:
-            print ("Alert! Oxygen value", oxygen, "below threshold of 18")
+            print ("Alert! Oxygen value", oxygen, "below threshold of 18 ppm. Immediate action required!")
             #sendAlert(yyyymmddhhmm, oxygen)
         else:
             print ("Oxygen levels normal at a minimum of", oxygen)

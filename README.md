@@ -45,7 +45,7 @@ The partition key therefore will be based on:
 - The `name of the ship`
 - The `name of the sensor`
 Because we want to find outliers easily, it will be helpful to group and sort the data based on oxygen level. Therefore the clustering key will be based on:
-- `oxygen level`
+- `oxygen level in ppm`
 All of this results in the following table structure:
 ```sql
 CREATE TABLE IF NOT EXISTS sensor_data (
@@ -53,17 +53,16 @@ CREATE TABLE IF NOT EXISTS sensor_data (
   updated timestamp,
   ship text,
   sensor text,
-  oxygen int,
-  flow int,
-  PRIMARY KEY ((yyyymmddhhmm, ship, sensor), oxygen)
-) WITH CLUSTERING ORDER BY (oxygen ASC);
+  reading int,
+  PRIMARY KEY ((yyyymmddhhmm, ship, sensor), reading)
+) WITH CLUSTERING ORDER BY (reading ASC);
 ```
-The primary key consists of the combined attributes `yyyymmddhhmm`, `ship` and `sensor` to be able to find the relevant data quickly as this data will be stored on one partition. Additionally we place a clustering key on `oxygen` in ascending order so that the data gets sorted. This allows to limit the results to the first row, again speeding up the read activity, because the first row will contain the lowest value for `oxygen`.
+The primary key consists of the combined attributes `yyyymmddhhmm`, `ship` and `sensor` to be able to find the relevant data quickly as this data will be stored on one partition. Additionally we place a clustering key on `reading` in ascending order so that the data gets sorted. This allows to limit the results to the first row, again speeding up the read activity, because the first row will contain the lowest value for `reading`.
 
 ### Query
 We want to quickly know if there is an outlier during the last rolling window of a minute. The easiest way to do this is utilizing the partition keys and clustering key.
 ```sql
-SELECT oxygen FROM sensor_data
+SELECT reading FROM sensor_data
 WHERE yyyymmddhhmm = '202008161202' AND ship = 'Starship Astra' AND sensor = 'oxygen'
 LIMIT 1;
 ```
@@ -111,13 +110,13 @@ This will create the oxygen_filter table that accepts information from the oxyge
 Run: `./addRows.sh`. Take a look at the embedded REST call.
 
 ### Test querying the sensor table
-Run: `./query.sh`. Take a look at the embedded REST call.
+Run: `./query.sh`. Take a look at the embedded REST call.  
+Take note of the automatic order done by the cluster!
 
 ## Simulate the oxygen IOT device
 
 ### IOT data generation
 In 98% of the time we generate a normal O value of 18-22, the other 2% we generate outliers from 14-17.  
-For the flow value, in 95% of the time we generate a normal value of 4-5, the other 5% we generate outliers from 2-3.  
 One IOT data point per second is generated as follows in the JMeter HTTP thread definition calling the Astra REST endpoint:  
 ```json
 ${__setProperty(time, ${__time(yyyy-MM-dd HH:mm:ss.S)}, False)}
@@ -128,8 +127,7 @@ ${__setProperty(yyyymmddhhmm, ${__time(yyyyMMddHHmm)}, False)}
   {"name":"updated","value":"${__P(time)}"},
   {"name":"ship","value":"Starship Astra"},
   {"name":"sensor","value":"oxygen"},
-  {"name":"oxygen","value":${__javaScript(${__Random(0,100)} > 98 ? ${__Random(14,17)} : ${__Random(18,22)})}},
-  {"name":"flow","value":${__javaScript(${__Random(0,100)} > 95 ? ${__Random(2,3)} : ${__Random(4,5)})}}
+  {"name":"reading","value":${__javaScript(${__Random(0,100)} > 98 ? ${__Random(14,17)} : ${__Random(18,22)})}}
 ]}
 ```
 
@@ -178,39 +176,40 @@ npm install aws-sdk
 ```
 8. Deploy the serverless functions running `sls deploy`.
 
-### Create the oxygen_filter table in the life_support_systems keyspace (if not done already)
-Call the REST endpoint (replace the URL to match your instance):
+### Create the oxygen_filter table in the life_support_systems keyspace (if not done already, or drop it)
+Call the AWS Lambda REST endpoint (replace the URL to match your instance):
 ```sh
-curl -X POST https://62ky6615mc.execute-api.eu-west-1.amazonaws.com/dev/createSchema
+curl -X POST https://2qx7yo740c.execute-api.eu-west-1.amazonaws.com/dev/createSchema
 ```
 
 ### Add some test data (for the demo, use JMeter explained above)
-Call the rest endpoint:
+Call the AWS Lambda rest endpoint:
 ```sh
-curl -X POST -d '{"yyyymmddhhmm": "202008161210", "updated": "2020-08-16 12:10:31.020", "ship": "Starship Astra", "sensor": "oxygen", "oxygen": 18, "flow": 5}' https://2qx7yo740c.execute-api.eu-west-1.amazonaws.com/dev/addSensorReading
-curl -X POST -d '{"yyyymmddhhmm": "202008161210", "updated": "2020-08-16 12:10:31.020", "ship": "Starship Astra", "sensor": "oxygen", "oxygen": 20, "flow": 5}' https://2qx7yo740c.execute-api.eu-west-1.amazonaws.com/dev/addSensorReading
-curl -X POST -d '{"yyyymmddhhmm": "202008161210", "updated": "2020-08-16 12:10:31.020", "ship": "Starship Astra", "sensor": "oxygen", "oxygen": 17, "flow": 5}' https://2qx7yo740c.execute-api.eu-west-1.amazonaws.com/dev/addSensorReading
+curl -X POST -d '{"yyyymmddhhmm": "202008161210", "updated": "2020-08-16 12:10:31.020", "ship": "Starship Astra", "sensor": "oxygen", "reading": 18}' https://2qx7yo740c.execute-api.eu-west-1.amazonaws.com/dev/addSensorReading
+curl -X POST -d '{"yyyymmddhhmm": "202008161210", "updated": "2020-08-16 12:10:31.020", "ship": "Starship Astra", "sensor": "oxygen", "reading": 20}' https://2qx7yo740c.execute-api.eu-west-1.amazonaws.com/dev/addSensorReading
+curl -X POST -d '{"yyyymmddhhmm": "202008161210", "updated": "2020-08-16 12:10:31.020", "ship": "Starship Astra", "sensor": "oxygen", "reading": 17}' https://2qx7yo740c.execute-api.eu-west-1.amazonaws.com/dev/addSensorReading
 ```
 
 ### Test querying the test data
-Call the rest endpoint (some variables haven been hardcoded for the sake of time):
+Call the AWS Lambda rest endpoint (some variables haven been hardcoded for the sake of time):
 ```sh
 curl -X GET https://2qx7yo740c.execute-api.eu-west-1.amazonaws.com/dev/getReading
 ```
 
+### Test sending an SMS
+Call the rest endpoint which on it's turn cals the SNS service of AWS to send an SMS:
+```sh
+curl -X POST -d '{"receiver": "+31638507567", "sender": "Starship", "message": "This is a test message"}' https://2qx7yo740c.execute-api.eu-west-1.amazonaws.com/dev/test/send
+```
+
 ### Test monitoring
-Make sure JMeter is firing the endpoint to simulate the oxygen sensor.  
+Make sure JMeter is firing the endpoint to simulate the oxygen sensor. Also update `MONITOR_SMS_NUMBER` in `serverless.yml` to match your cell phone number.  
 Call the rest endpoint (some variables haven been hardcoded for the sake of time):
 ```sh
 curl -X GET https://2qx7yo740c.execute-api.eu-west-1.amazonaws.com/dev/monitorOxygen
 ```
 
-### Test sending an SMS
-Call the rest endpoint:
-```sh
-curl -X POST -d '{"receiver": "+31638507567", "sender": "Starship", "message": "This is a test message"}' https://2qx7yo740c.execute-api.eu-west-1.amazonaws.com/dev/test/send
-```
-
 ### Operationalize the monitoring process
-Update `serverless.yml` and change `enabled: false` to `enabled: true ` for function `monitorOxygen`. Also update `MONITOR_SMS_NUMBER` to match your cell phone number.  
-Run `sls deploy` and sit back!
+Update `serverless.yml` and change `enabled: false` to `enabled: true ` for function `monitorOxygen`. Also update `MONITOR_SMS_NUMBER` in `serverless.yml` to match your cell phone number.  
+Run `sls deploy` and sit back!  
+***Important:*** Make sure to change enabled back to false and run another deploy. Else the monitoring app keeps running which will incur a cost!
