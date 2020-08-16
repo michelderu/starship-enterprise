@@ -1,0 +1,64 @@
+service: aws-node-cassandra-http-api
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  stage: dev
+  region: eu-west-1
+  deploymentBucket:
+    name: starship-enterprise-lifesupport
+  environment:
+      ASTRA_SECURE_CONNECT_BUNDLE: secure-connect-starship-enterprise.zip
+      ASTRA_DB_USERNAME: michel
+      ASTRA_DB_PASSWORD: kawasaki
+      MONITOR_SMS_NUMBER: +31638507567
+  iamRoleStatements:
+  - Effect: "Allow"
+    Resource: "*"
+    Action:
+      - "sns:*"
+
+functions:
+  createSchema:
+    handler: handler.createSchema 
+    events: 
+      - http:
+          path: createSchema
+          method: post
+          cors: true
+  addSensorReading:
+    handler: handler.addSensorReading
+    events: 
+      - http:
+          path: addSensorReading
+          method: post
+          cors: true
+  getReading:
+    handler: handler.getReading
+    events: 
+      - http:
+          path: getReading
+          method: get
+          cors: true
+  sendSMS:
+    handler: handler.sendSMS
+    events:
+      - http:
+          path: test/send
+          method: post
+          cors: true
+  monitorOxygen:
+    handler: handler.monitorOxygen
+    events:
+      - http:
+          path: monitorOxygen
+          method: get
+          cors: true
+      - schedule:
+          rate: rate(1 minute)
+          enabled: false
+
+package:
+  include:
+    - handler.js
+  excludeDevDependencies: false
