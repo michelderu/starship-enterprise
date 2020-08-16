@@ -6,3 +6,4 @@
 .vscode/
 astra/astra_credentials.txt
 astra/astra_token.txt
+aws-lambda-monitor/serverless_credentials.csv

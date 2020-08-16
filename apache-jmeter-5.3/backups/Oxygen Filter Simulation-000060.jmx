@@ -16,12 +16,12 @@
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
           <boolProp name="LoopController.continue_forever">false</boolProp>
-          <stringProp name="LoopController.loops">10</stringProp>
+          <intProp name="LoopController.loops">-1</intProp>
         </elementProp>
         <stringProp name="ThreadGroup.num_threads">1</stringProp>
         <stringProp name="ThreadGroup.ramp_time">1</stringProp>
         <boolProp name="ThreadGroup.scheduler">true</boolProp>
-        <stringProp name="ThreadGroup.duration">60</stringProp>
+        <stringProp name="ThreadGroup.duration">300</stringProp>
         <stringProp name="ThreadGroup.delay"></stringProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
       </ThreadGroup>
@@ -42,7 +42,7 @@
             </elementProp>
             <elementProp name="" elementType="Header">
               <stringProp name="Header.name">x-cassandra-token</stringProp>
-              <stringProp name="Header.value">8ff1c6cd-f2fc-4523-ace0-7cab7dcce5d6</stringProp>
+              <stringProp name="Header.value">b9ed4839-b18c-4ae5-af4b-17251d8a4088</stringProp>
             </elementProp>
           </collectionProp>
         </HeaderManager>
@@ -53,12 +53,15 @@
             <collectionProp name="Arguments.arguments">
               <elementProp name="" elementType="HTTPArgument">
                 <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                <stringProp name="Argument.value">{&quot;columns&quot;:[&#xd;
-  {&quot;name&quot;:&quot;name&quot;,&quot;value&quot;:&quot;main_scrubber&quot;},&#xd;
-  {&quot;name&quot;:&quot;description&quot;,&quot;value&quot;:&quot;Level 1 life support&quot;},&#xd;
-  {&quot;name&quot;:&quot;flow&quot;,&quot;value&quot;:&quot;${__Random(0,10)}&quot;},&#xd;
-  {&quot;name&quot;:&quot;oxygen&quot;,&quot;value&quot;:&quot;${__Random(15,25)}&quot;},&#xd;
-  {&quot;name&quot;:&quot;updated&quot;,&quot;value&quot;:&quot;${__time(yyyy-MM-dd HH:mm:ss)}&quot;}&#xd;
+                <stringProp name="Argument.value">${__setProperty(time, ${__time(yyyy-MM-dd HH:mm:ss.S)}, False)}&#xd;
+${__setProperty(yyyymmddhhmm, ${__time(yyyyMMddHHmm)}, False)}&#xd;
+{&quot;columns&quot;:[&#xd;
+  {&quot;name&quot;:&quot;yyyymmddhhmm&quot;,&quot;value&quot;:&quot;${__P(yyyymmddhhmm)}&quot;},&#xd;
+  {&quot;name&quot;:&quot;updated&quot;,&quot;value&quot;:&quot;${__P(time)}&quot;},&#xd;
+  {&quot;name&quot;:&quot;ship&quot;,&quot;value&quot;:&quot;Starship Astra&quot;},&#xd;
+  {&quot;name&quot;:&quot;sensor&quot;,&quot;value&quot;:&quot;oxygen&quot;},&#xd;
+  {&quot;name&quot;:&quot;oxygen&quot;,&quot;value&quot;:${__javaScript(${__Random(0,100)} &gt; 98 ? ${__Random(14,17)} : ${__Random(18,22)})}},&#xd;
+  {&quot;name&quot;:&quot;flow&quot;,&quot;value&quot;:${__javaScript(${__Random(0,100)} &gt; 95 ? ${__Random(2,3)} : ${__Random(4,5)})}}&#xd;
 ]}</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
               </elementProp>
@@ -68,7 +71,7 @@
           <stringProp name="HTTPSampler.port">443</stringProp>
           <stringProp name="HTTPSampler.protocol">https</stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-          <stringProp name="HTTPSampler.path">/api/rest/v1/keyspaces/life_support_systems/tables/oxygen_filter/rows</stringProp>
+          <stringProp name="HTTPSampler.path">/api/rest/v1/keyspaces/life_support_systems/tables/sensor_data/rows</stringProp>
           <stringProp name="HTTPSampler.method">POST</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <boolProp name="HTTPSampler.auto_redirects">false</boolProp>

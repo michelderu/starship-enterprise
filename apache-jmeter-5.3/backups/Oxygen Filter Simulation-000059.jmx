@@ -42,7 +42,7 @@
             </elementProp>
             <elementProp name="" elementType="Header">
               <stringProp name="Header.name">x-cassandra-token</stringProp>
-              <stringProp name="Header.value">34a2371b-a89c-4041-8c17-241bce9fb5a6</stringProp>
+              <stringProp name="Header.value">b9ed4839-b18c-4ae5-af4b-17251d8a4088</stringProp>
             </elementProp>
           </collectionProp>
         </HeaderManager>
@@ -61,7 +61,7 @@ ${__setProperty(yyyymmddhhmm, ${__time(yyyyMMddHHmm)}, False)}&#xd;
   {&quot;name&quot;:&quot;ship&quot;,&quot;value&quot;:&quot;Starship Astra&quot;},&#xd;
   {&quot;name&quot;:&quot;sensor&quot;,&quot;value&quot;:&quot;oxygen&quot;},&#xd;
   {&quot;name&quot;:&quot;oxygen&quot;,&quot;value&quot;:${__javaScript(${__Random(0,100)} &gt; 98 ? ${__Random(14,17)} : ${__Random(18,22)})}},&#xd;
-  {&quot;name&quot;:&quot;flow&quot;,&quot;value&quot;:${__javaScript(${__Random(0,100)} &gt; 95 ? ${__Random(2,3)} : ${__Random(4,5)})}}&#xd;
+  {&quot;name&quot;:&quot;flow&quot;,&quot;value&quot;:${__javaScript(${__Random(0,100)} &gt; 98 ? ${__Random(2,3)} : ${__Random(4,5)})}}&#xd;
 ]}</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
               </elementProp>

@@ -1,0 +1,67 @@
+2020-08-16 14:15:35,298 INFO o.a.j.u.JMeterUtils: Setting Locale to en_NL
+2020-08-16 14:15:35,323 INFO o.a.j.JMeter: Loading user properties from: /Users/michelderu/projects/starship-enterprise/apache-jmeter-5.3/bin/user.properties
+2020-08-16 14:15:35,324 INFO o.a.j.JMeter: Loading system properties from: /Users/michelderu/projects/starship-enterprise/apache-jmeter-5.3/bin/system.properties
+2020-08-16 14:15:35,325 INFO o.a.j.JMeter: Copyright (c) 1998-2020 The Apache Software Foundation
+2020-08-16 14:15:35,325 INFO o.a.j.JMeter: Version 5.3
+2020-08-16 14:15:35,325 INFO o.a.j.JMeter: java.version=1.8.0_192
+2020-08-16 14:15:35,325 INFO o.a.j.JMeter: java.vm.name=Java HotSpot(TM) 64-Bit Server VM
+2020-08-16 14:15:35,325 INFO o.a.j.JMeter: os.name=Mac OS X
+2020-08-16 14:15:35,326 INFO o.a.j.JMeter: os.arch=x86_64
+2020-08-16 14:15:35,326 INFO o.a.j.JMeter: os.version=10.15.5
+2020-08-16 14:15:35,326 INFO o.a.j.JMeter: file.encoding=UTF-8
+2020-08-16 14:15:35,326 INFO o.a.j.JMeter: java.awt.headless=null
+2020-08-16 14:15:35,326 INFO o.a.j.JMeter: Max memory     =3817865216
+2020-08-16 14:15:35,326 INFO o.a.j.JMeter: Available Processors =8
+2020-08-16 14:15:35,334 INFO o.a.j.JMeter: Default Locale=English (Netherlands)
+2020-08-16 14:15:35,335 INFO o.a.j.JMeter: JMeter  Locale=English (Netherlands)
+2020-08-16 14:15:35,335 INFO o.a.j.JMeter: JMeterHome=/Users/michelderu/projects/starship-enterprise/apache-jmeter-5.3
+2020-08-16 14:15:35,335 INFO o.a.j.JMeter: user.dir  =/Users/michelderu/projects/starship-enterprise/apache-jmeter-5.3
+2020-08-16 14:15:35,335 INFO o.a.j.JMeter: PWD       =/Users/michelderu/projects/starship-enterprise/apache-jmeter-5.3
+2020-08-16 14:15:35,337 INFO o.a.j.JMeter: IP: 127.0.0.1 Name: Michels-MacBook-Pro.local FullName: localhost
+2020-08-16 14:15:35,847 INFO o.a.j.JMeter: Setting LAF to: com.github.weisj.darklaf.DarkLaf:com.github.weisj.darklaf.theme.DarculaTheme
+2020-08-16 14:15:37,518 INFO o.a.j.JMeter: Loaded icon properties from org/apache/jmeter/images/icon.properties
+2020-08-16 14:15:47,129 INFO o.a.j.s.FileServer: Default base='/Users/michelderu/projects/starship-enterprise/apache-jmeter-5.3'
+2020-08-16 14:15:47,134 INFO o.a.j.g.a.Load: Loading file: /Users/michelderu/projects/starship-enterprise/apache-jmeter-5.3/Oxygen Filter Simulation.jmx
+2020-08-16 14:15:47,134 INFO o.a.j.s.FileServer: Set new base='/Users/michelderu/projects/starship-enterprise/apache-jmeter-5.3'
+2020-08-16 14:15:47,265 INFO o.a.j.s.SaveService: Testplan (JMX) version: 2.2. Testlog (JTL) version: 2.2
+2020-08-16 14:15:47,283 INFO o.a.j.s.SaveService: Using SaveService properties file encoding UTF-8
+2020-08-16 14:15:47,285 INFO o.a.j.s.SaveService: Using SaveService properties version 5.0
+2020-08-16 14:15:47,287 INFO o.a.j.s.SaveService: Loading file: /Users/michelderu/projects/starship-enterprise/apache-jmeter-5.3/Oxygen Filter Simulation.jmx
+2020-08-16 14:15:47,309 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for text/html is org.apache.jmeter.protocol.http.parser.LagartoBasedHtmlParser
+2020-08-16 14:15:47,309 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for application/xhtml+xml is org.apache.jmeter.protocol.http.parser.LagartoBasedHtmlParser
+2020-08-16 14:15:47,309 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for application/xml is org.apache.jmeter.protocol.http.parser.LagartoBasedHtmlParser
+2020-08-16 14:15:47,309 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for text/xml is org.apache.jmeter.protocol.http.parser.LagartoBasedHtmlParser
+2020-08-16 14:15:47,310 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for text/vnd.wap.wml is org.apache.jmeter.protocol.http.parser.RegexpHTMLParser
+2020-08-16 14:15:47,310 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for text/css is org.apache.jmeter.protocol.http.parser.CssParser
+2020-08-16 14:15:47,412 INFO o.a.j.s.SampleResult: Note: Sample TimeStamps are START times
+2020-08-16 14:15:47,412 INFO o.a.j.s.SampleResult: sampleresult.default.encoding is set to ISO-8859-1
+2020-08-16 14:15:47,412 INFO o.a.j.s.SampleResult: sampleresult.useNanoTime=true
+2020-08-16 14:15:47,412 INFO o.a.j.s.SampleResult: sampleresult.nanoThreadSleep=5000
+2020-08-16 14:15:47,624 INFO o.a.j.s.FileServer: Set new base='/Users/michelderu/projects/starship-enterprise/apache-jmeter-5.3'
+2020-08-16 14:15:53,158 INFO o.a.j.e.StandardJMeterEngine: Running the test!
+2020-08-16 14:15:53,158 INFO o.a.j.s.SampleEvent: List of sample_variables: []
+2020-08-16 14:15:53,158 INFO o.a.j.s.SampleEvent: List of sample_variables: []
+2020-08-16 14:15:53,159 INFO o.a.j.e.u.CompoundVariable: Note: Function class names must contain the string: '.functions.'
+2020-08-16 14:15:53,159 INFO o.a.j.e.u.CompoundVariable: Note: Function class names must not contain the string: '.gui.'
+2020-08-16 14:15:53,426 INFO o.a.j.g.u.JMeterMenuBar: setRunning(true, *local*)
+2020-08-16 14:15:53,555 INFO o.a.j.e.StandardJMeterEngine: Starting ThreadGroup: 1 : Starship Enterprise - Life Support Systems
+2020-08-16 14:15:53,555 INFO o.a.j.e.StandardJMeterEngine: Starting 1 threads for group Starship Enterprise - Life Support Systems.
+2020-08-16 14:15:53,555 INFO o.a.j.e.StandardJMeterEngine: Thread will continue on error
+2020-08-16 14:15:53,555 INFO o.a.j.t.ThreadGroup: Starting thread group... number=1 threads=1 ramp-up=1 delayedStart=false
+2020-08-16 14:15:53,560 INFO o.a.j.t.ThreadGroup: Started thread group number 1
+2020-08-16 14:15:53,560 INFO o.a.j.e.StandardJMeterEngine: All thread groups have been started
+2020-08-16 14:15:53,561 INFO o.a.j.t.JMeterThread: Thread started: Starship Enterprise - Life Support Systems 1-1
+2020-08-16 14:15:53,571 INFO o.a.j.p.h.s.HTTPHCAbstractImpl: Local host = Michels-MacBook-Pro.local
+2020-08-16 14:15:53,577 INFO o.a.j.p.h.s.HTTPHC4Impl: HTTP request retry count = 0
+2020-08-16 14:15:53,816 INFO o.a.j.p.h.s.h.LazyLayeredConnectionSocketFactory: Setting up HTTPS TrustAll Socket Factory
+2020-08-16 14:15:53,821 INFO o.a.j.u.JsseSSLManager: Using default SSL protocol: TLS
+2020-08-16 14:15:53,822 INFO o.a.j.u.JsseSSLManager: SSL session context: per-thread
+2020-08-16 14:15:54,017 INFO o.a.j.u.SSLManager: JmeterKeyStore Location:  type JKS
+2020-08-16 14:15:54,017 INFO o.a.j.u.SSLManager: KeyStore created OK
+2020-08-16 14:15:54,017 WARN o.a.j.u.SSLManager: Keystore file not found, loading empty keystore
+2020-08-16 14:16:11,623 INFO o.a.j.g.a.Start: Stopping test
+2020-08-16 14:16:11,637 INFO o.a.j.t.JMeterThread: Stopping: Starship Enterprise - Life Support Systems 1-1
+2020-08-16 14:16:11,637 WARN o.a.j.t.JMeterThread: The delay timer was interrupted - probably did not wait as long as intended.
+2020-08-16 14:16:11,637 INFO o.a.j.t.JMeterThread: Thread finished: Starship Enterprise - Life Support Systems 1-1
+2020-08-16 14:16:11,640 INFO o.a.j.e.StandardJMeterEngine: Notifying test listeners of end of test
+2020-08-16 14:16:11,641 INFO o.a.j.g.u.JMeterMenuBar: setRunning(false, *local*)
