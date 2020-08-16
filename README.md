@@ -155,7 +155,7 @@ Make sure JMeter is firing the endpoint to simulate the oxygen sensor.
 Now run `run_monitoring.sh`.
 
 ## AWS cloud-native Monitoring App
-All activities are relative to the `./aws-lambda-monitor` directory!
+All activities are relative to the `./aws-monitoring` directory!
 
 ### Design
 The cloud-native solutions uses a full serverless design. No need for standing up nodes anymore!  
