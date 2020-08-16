@@ -211,3 +211,6 @@
 2020-08-16 18:36:37,912 INFO o.a.j.t.ThreadGroup: Started thread group number 1
 2020-08-16 18:36:37,912 INFO o.a.j.e.StandardJMeterEngine: All thread groups have been started
 2020-08-16 18:36:37,913 INFO o.a.j.t.JMeterThread: Thread started: Starship Enterprise - Life Support Systems 1-1
+2020-08-16 18:41:36,937 INFO o.a.j.t.JMeterThread: Thread finished: Starship Enterprise - Life Support Systems 1-1
+2020-08-16 18:41:36,937 INFO o.a.j.e.StandardJMeterEngine: Notifying test listeners of end of test
+2020-08-16 18:41:36,937 INFO o.a.j.g.u.JMeterMenuBar: setRunning(false, *local*)
