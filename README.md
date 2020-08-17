@@ -4,7 +4,7 @@ The single most important safety issue is the quality of oxygen. No oxygen == No
 In order to maximise safety on each ship an extensive monitoring system has been implemented by you for life support. This monitoring system takes information from thousands of systems and stores it securely in a scalable Cassandra architecture.  
 Cassandra has been choosen because of it's zero-downtime capabilities and it's lightning fast write operations allowing for secure storage of all measurements of all IOT sensors.  
 
-![AWS Architecture Goal](./diagrams/AWS Architecture.png)
+![AWS Architecture Goal](diagrams/AWS Architecture.png)
 
 ## Components in the demo
 ### Database
