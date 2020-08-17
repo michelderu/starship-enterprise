@@ -2,9 +2,11 @@
 Welcome to the Starship Enterprise Fleet! And congratulations, you're the Safety Manager responsible for the safety of all personnel.  
 The single most important safety issue is the quality of oxygen. No oxygen == No people!  
 In order to maximise safety on each ship an extensive monitoring system has been implemented by you for life support. This monitoring system takes information from thousands of systems and stores it securely in a scalable Cassandra architecture.  
-Cassandra has been choosen because of it's zero-downtime capabilities and it's lightning fast write operations allowing for secure storage of all measurements of all IOT sensors.  
+Cassandra has been choosen because of it's zero-downtime capabilities and it's lightning fast write operations allowing for secure storage of all measurements of all IOT sensors.
 
-![AWS Architecture Goal](diagrams/AWS Architecture.png)
+The ultime goale is to create a full serverless application that utilized the serverless DataStax Astra database and AWS Lambda functions as follows:
+
+![AWS Architecture Goal](diagrams/aws-architecture.png)
 
 ## Components in the demo
 ### Database
