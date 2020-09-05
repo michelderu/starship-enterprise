@@ -130,7 +130,9 @@ async function sendSMS(receiver, sender, message) {
     console.log("Sent message to", receiver, "with data", data);
     return {
       statusCode: 200,
-      data
+      body: JSON.stringify({
+        data: data
+      })
     };
 
   } catch (err) {

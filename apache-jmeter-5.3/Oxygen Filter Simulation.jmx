@@ -42,7 +42,7 @@
             </elementProp>
             <elementProp name="" elementType="Header">
               <stringProp name="Header.name">x-cassandra-token</stringProp>
-              <stringProp name="Header.value">1eb01e12-a76f-40e6-9e94-aaf1b4434478</stringProp>
+              <stringProp name="Header.value">3df40b40-8a18-41da-951d-163b9d8f69b5</stringProp>
             </elementProp>
           </collectionProp>
         </HeaderManager>

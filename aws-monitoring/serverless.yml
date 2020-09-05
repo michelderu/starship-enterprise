@@ -9,9 +9,9 @@ provider:
     name: starship-enterprise-lifesupport
   environment:
       ASTRA_SECURE_CONNECT_BUNDLE: secure-connect-starship-enterprise.zip
-      ASTRA_DB_USERNAME: michel
-      ASTRA_DB_PASSWORD: kawasaki
-      MONITOR_SMS_NUMBER: +31638507567
+      ASTRA_DB_USERNAME: username
+      ASTRA_DB_PASSWORD: password
+      MONITOR_SMS_NUMBER: +31612345678
   iamRoleStatements:
   - Effect: "Allow"
     Resource: "*"
