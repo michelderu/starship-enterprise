@@ -74,7 +74,7 @@ LIMIT 1;
 This will retrieve all oxygen reading from the current rolling minut window, with the oxygen value sorted in an ascending order. So the smallest value will be first, easily allowing to check if it's < 18. Limiting to 1 gives us the number we're interested in.
 
 ## 3️⃣ Setting up Astra
-> **TAGS**
+> **TAGS**  
 > ✅ Terraform  
 > ✅ ASTRA REST API
 
