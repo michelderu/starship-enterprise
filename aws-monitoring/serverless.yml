@@ -4,14 +4,15 @@ provider:
   name: aws
   runtime: nodejs12.x
   stage: dev
-  region: eu-west-1
+  region: eu-central-1
   deploymentBucket:
-    name: starship-enterprise-lifesupport
+    name: astra-starship
   environment:
-      ASTRA_SECURE_CONNECT_BUNDLE: secure-connect-starship-enterprise.zip
-      ASTRA_DB_USERNAME: username
-      ASTRA_DB_PASSWORD: password
-      MONITOR_SMS_NUMBER: +31612345678
+      ASTRA_SECURE_CONNECT_BUNDLE: secure_connect_bundle.zip
+      ASTRA_CLIENT_ID: qRiZFbYULduQYOlqOPsJyGxR
+      ASTRA_CLIENT_SECRET: 9EucT2huQwGrYT+DmAI5cgkjzpl3keC,6.2Kcz8C_dPooX39jC9aRkfhKLz6UWdOO_Cd+Nc1cJZaX1BxCLWlNX3wsDHU_N-d-FgUJfw7T_-8M_m8oQ3UNdp56nicCbAW
+      ASTRA_DB_APPLICATION_TOKEN: AstraCS:qRiZFbYULduQYOlqOPsJyGxR:660ba64e73ddfe5ccda71a38c48847ab2f4cc53944f6a12f63fe2979eec2a4c1
+      MONITOR_SMS_NUMBER: +31638507567
   iamRoleStatements:
   - Effect: "Allow"
     Resource: "*"

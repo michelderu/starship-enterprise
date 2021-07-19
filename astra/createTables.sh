@@ -14,21 +14,19 @@ source astra_token.txt
 # Initially drop the table
 echo "Dropping table"
 curl -w "%{http_code}" --request DELETE \
-  --url https://${ASTRA_CLUSTER_ID}-${ASTRA_CLUSTER_REGION}.apps.astra.datastax.com/api/rest/v1/keyspaces/life_support_systems/tables/sensor_data \
+  --url https://${ASTRA_DB_ID}-${ASTRA_DB_REGION}.apps.astra.datastax.com/api/rest/v1/keyspaces/life_support_systems/tables/sensor_data \
   --header 'accept: */*' \
-  --header "x-cassandra-request-id: ${ASTRA_UUID}" \
-  --header "x-cassandra-token: ${ASTRA_AUTHORIZATION_TOKEN}"
+  --header "x-cassandra-token: ${ASTRA_DB_APPLICATION_TOKEN}"
 
 echo
 
 # Create table for Oxigen Filter Levels
 echo "Creating table"
 curl -w "%{http_code}" --request POST \
-  --url https://${ASTRA_CLUSTER_ID}-${ASTRA_CLUSTER_REGION}.apps.astra.datastax.com/api/rest/v1/keyspaces/life_support_systems/tables \
-  --header 'accept: */*' \
+  --url https://${ASTRA_DB_ID}-${ASTRA_DB_REGION}.apps.astra.datastax.com/api/rest/v1/keyspaces/life_support_systems/tables \
+  --header 'accept: application/json' \
   --header 'content-type: application/json' \
-  --header "x-cassandra-request-id: ${ASTRA_UUID}" \
-  --header "x-cassandra-token: ${ASTRA_AUTHORIZATION_TOKEN}" \
+  --header "x-cassandra-token: ${ASTRA_DB_APPLICATION_TOKEN}" \
   --data '{
         "name":"sensor_data",
         "ifNotExists":true,

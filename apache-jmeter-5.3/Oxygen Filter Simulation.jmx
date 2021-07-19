@@ -26,6 +26,26 @@
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
       </ThreadGroup>
       <hashTree>
+        <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="Connection settings" enabled="true">
+          <collectionProp name="Arguments.arguments">
+            <elementProp name="ASTRA_DB_ID" elementType="Argument">
+              <stringProp name="Argument.name">ASTRA_DB_ID</stringProp>
+              <stringProp name="Argument.value">f70d2173-d52f-4d69-bee6-7789efbb131a</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="ASTRA_DB_REGION" elementType="Argument">
+              <stringProp name="Argument.name">ASTRA_DB_REGION</stringProp>
+              <stringProp name="Argument.value">eu-central-1</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="ASTRA_DB_APPLICATION_TOKEN" elementType="Argument">
+              <stringProp name="Argument.name">ASTRA_DB_APPLICATION_TOKEN</stringProp>
+              <stringProp name="Argument.value">AstraCS:qRiZFbYULduQYOlqOPsJyGxR:660ba64e73ddfe5ccda71a38c48847ab2f4cc53944f6a12f63fe2979eec2a4c1</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+          </collectionProp>
+        </Arguments>
+        <hashTree/>
         <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="Astra REST headers" enabled="true">
           <collectionProp name="HeaderManager.headers">
             <elementProp name="" elementType="Header">
@@ -37,12 +57,8 @@
               <stringProp name="Header.value">application/json</stringProp>
             </elementProp>
             <elementProp name="" elementType="Header">
-              <stringProp name="Header.name">x-cassandra-request-id</stringProp>
-              <stringProp name="Header.value">ee8c5cd4-d7e4-11ea-87d0-0242ac130003</stringProp>
-            </elementProp>
-            <elementProp name="" elementType="Header">
               <stringProp name="Header.name">x-cassandra-token</stringProp>
-              <stringProp name="Header.value">3df40b40-8a18-41da-951d-163b9d8f69b5</stringProp>
+              <stringProp name="Header.value">${ASTRA_DB_APPLICATION_TOKEN}</stringProp>
             </elementProp>
           </collectionProp>
         </HeaderManager>
@@ -53,7 +69,7 @@
             <collectionProp name="Arguments.arguments">
               <elementProp name="" elementType="HTTPArgument">
                 <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                <stringProp name="Argument.value">${__setProperty(time, ${__time(yyyy-MM-dd HH:mm:ss.S)}, False)}&#xd;
+                <stringProp name="Argument.value">${__setProperty(time, ${__time(yyyy-MM-dd)}T${__time(HH:mm:ss.S)}Z, False)}&#xd;
 ${__setProperty(yyyymmddhhmm, ${__time(yyyyMMddHHmm)}, False)}&#xd;
 &#xd;
 {&quot;columns&quot;:[&#xd;
@@ -67,7 +83,7 @@ ${__setProperty(yyyymmddhhmm, ${__time(yyyyMMddHHmm)}, False)}&#xd;
               </elementProp>
             </collectionProp>
           </elementProp>
-          <stringProp name="HTTPSampler.domain">95677c58-2469-4a32-a3bb-1b85fec48d83-europe-west1.apps.astra.datastax.com</stringProp>
+          <stringProp name="HTTPSampler.domain">${ASTRA_DB_ID}-${ASTRA_DB_REGION}.apps.astra.datastax.com</stringProp>
           <stringProp name="HTTPSampler.port">443</stringProp>
           <stringProp name="HTTPSampler.protocol">https</stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>

@@ -10,3 +10,7 @@ astra_credentials.txt
 astra_token.txt
 serverless_credentials.csv
 secure-connect-starship-enterprise.zip
+
+.terraform*
+terraform.tfstate*
+secure_connect_bundle.zip

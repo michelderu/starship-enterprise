@@ -18,7 +18,7 @@ def connectAstra():
     cloud_config = {
         'secure_connect_bundle': os.getcwd() + '/' + os.getenv('ASTRA_SECURE_CONNECT_BUNDLE')
     }
-    auth_provider = PlainTextAuthProvider(username=os.getenv('ASTRA_DB_USERNAME'), password=os.getenv('ASTRA_DB_PASSWORD'))
+    auth_provider = PlainTextAuthProvider(os.getenv('ASTRA_CLIENT_ID'), os.getenv('ASTRA_CLIENT_SECRET'))
     cluster = Cluster(cloud=cloud_config, auth_provider=auth_provider)
     return cluster.connect()
 

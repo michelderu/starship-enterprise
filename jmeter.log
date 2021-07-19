@@ -1,0 +1,262 @@
+2021-07-19 13:38:37,745 INFO o.a.j.u.JMeterUtils: Setting Locale to en_NL
+2021-07-19 13:38:37,767 INFO o.a.j.JMeter: Loading user properties from: /Users/michelderu/projects/starship-enterprise/apache-jmeter-5.3/bin/user.properties
+2021-07-19 13:38:37,767 INFO o.a.j.JMeter: Loading system properties from: /Users/michelderu/projects/starship-enterprise/apache-jmeter-5.3/bin/system.properties
+2021-07-19 13:38:37,769 INFO o.a.j.JMeter: Copyright (c) 1998-2020 The Apache Software Foundation
+2021-07-19 13:38:37,769 INFO o.a.j.JMeter: Version 5.3
+2021-07-19 13:38:37,769 INFO o.a.j.JMeter: java.version=15.0.2
+2021-07-19 13:38:37,769 INFO o.a.j.JMeter: java.vm.name=OpenJDK 64-Bit Server VM
+2021-07-19 13:38:37,769 INFO o.a.j.JMeter: os.name=Mac OS X
+2021-07-19 13:38:37,769 INFO o.a.j.JMeter: os.arch=x86_64
+2021-07-19 13:38:37,769 INFO o.a.j.JMeter: os.version=10.16
+2021-07-19 13:38:37,769 INFO o.a.j.JMeter: file.encoding=UTF-8
+2021-07-19 13:38:37,769 INFO o.a.j.JMeter: java.awt.headless=null
+2021-07-19 13:38:37,769 INFO o.a.j.JMeter: Max memory     =8589934592
+2021-07-19 13:38:37,769 INFO o.a.j.JMeter: Available Processors =12
+2021-07-19 13:38:37,774 INFO o.a.j.JMeter: Default Locale=English (Netherlands)
+2021-07-19 13:38:37,775 INFO o.a.j.JMeter: JMeter  Locale=English (Netherlands)
+2021-07-19 13:38:37,775 INFO o.a.j.JMeter: JMeterHome=/Users/michelderu/projects/starship-enterprise/apache-jmeter-5.3
+2021-07-19 13:38:37,775 INFO o.a.j.JMeter: user.dir  =/Users/michelderu/projects/starship-enterprise
+2021-07-19 13:38:37,775 INFO o.a.j.JMeter: PWD       =/Users/michelderu/projects/starship-enterprise
+2021-07-19 13:38:37,777 INFO o.a.j.JMeter: IP: 192.168.1.164 Name: Michels-Werk-MacBook-Pro.local FullName: 192.168.1.164
+2021-07-19 13:38:38,098 INFO o.a.j.JMeter: Setting LAF to: laf:com.apple.laf.AquaLookAndFeel
+2021-07-19 13:38:38,920 INFO o.a.j.JMeter: Loaded icon properties from org/apache/jmeter/images/icon.properties
+2021-07-19 13:38:46,684 INFO o.a.j.s.FileServer: Default base='/Users/michelderu/projects/starship-enterprise'
+2021-07-19 13:38:46,687 INFO o.a.j.g.a.Load: Loading file: /Users/michelderu/projects/starship-enterprise/apache-jmeter-5.3/Oxygen Filter Simulation.jmx
+2021-07-19 13:38:46,687 INFO o.a.j.s.FileServer: Set new base='/Users/michelderu/projects/starship-enterprise/apache-jmeter-5.3'
+2021-07-19 13:38:46,826 INFO o.a.j.s.SaveService: Testplan (JMX) version: 2.2. Testlog (JTL) version: 2.2
+2021-07-19 13:38:46,841 INFO o.a.j.s.SaveService: Using SaveService properties version 5.0
+2021-07-19 13:38:46,842 INFO o.a.j.s.SaveService: Using SaveService properties file encoding UTF-8
+2021-07-19 13:38:46,843 INFO o.a.j.s.SaveService: Loading file: /Users/michelderu/projects/starship-enterprise/apache-jmeter-5.3/Oxygen Filter Simulation.jmx
+2021-07-19 13:38:46,863 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for text/html is org.apache.jmeter.protocol.http.parser.LagartoBasedHtmlParser
+2021-07-19 13:38:46,863 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for application/xhtml+xml is org.apache.jmeter.protocol.http.parser.LagartoBasedHtmlParser
+2021-07-19 13:38:46,863 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for application/xml is org.apache.jmeter.protocol.http.parser.LagartoBasedHtmlParser
+2021-07-19 13:38:46,863 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for text/xml is org.apache.jmeter.protocol.http.parser.LagartoBasedHtmlParser
+2021-07-19 13:38:46,863 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for text/vnd.wap.wml is org.apache.jmeter.protocol.http.parser.RegexpHTMLParser
+2021-07-19 13:38:46,863 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for text/css is org.apache.jmeter.protocol.http.parser.CssParser
+2021-07-19 13:38:46,941 INFO o.a.j.s.SampleResult: Note: Sample TimeStamps are START times
+2021-07-19 13:38:46,941 INFO o.a.j.s.SampleResult: sampleresult.default.encoding is set to ISO-8859-1
+2021-07-19 13:38:46,941 INFO o.a.j.s.SampleResult: sampleresult.useNanoTime=true
+2021-07-19 13:38:46,941 INFO o.a.j.s.SampleResult: sampleresult.nanoThreadSleep=5000
+2021-07-19 13:38:47,067 INFO o.a.j.v.ViewResultsFullVisualizer: Add JavaFX to your Java installation if you want to use renderer: org.apache.jmeter.visualizers.RenderInBrowser
+2021-07-19 13:38:47,116 INFO o.a.j.s.FileServer: Set new base='/Users/michelderu/projects/starship-enterprise/apache-jmeter-5.3'
+2021-07-19 13:38:50,961 INFO o.a.j.e.StandardJMeterEngine: Running the test!
+2021-07-19 13:38:50,962 INFO o.a.j.s.SampleEvent: List of sample_variables: []
+2021-07-19 13:38:50,962 INFO o.a.j.s.SampleEvent: List of sample_variables: []
+2021-07-19 13:38:50,963 INFO o.a.j.e.u.CompoundVariable: Note: Function class names must contain the string: '.functions.'
+2021-07-19 13:38:50,963 INFO o.a.j.e.u.CompoundVariable: Note: Function class names must not contain the string: '.gui.'
+2021-07-19 13:38:50,989 INFO o.a.j.g.u.JMeterMenuBar: setRunning(true, *local*)
+2021-07-19 13:38:51,023 INFO o.a.j.e.StandardJMeterEngine: Starting ThreadGroup: 1 : Starship Enterprise - Life Support Systems
+2021-07-19 13:38:51,023 INFO o.a.j.e.StandardJMeterEngine: Starting 1 threads for group Starship Enterprise - Life Support Systems.
+2021-07-19 13:38:51,024 INFO o.a.j.e.StandardJMeterEngine: Thread will continue on error
+2021-07-19 13:38:51,024 INFO o.a.j.t.ThreadGroup: Starting thread group... number=1 threads=1 ramp-up=1 delayedStart=false
+2021-07-19 13:38:51,026 INFO o.a.j.t.ThreadGroup: Started thread group number 1
+2021-07-19 13:38:51,027 INFO o.a.j.e.StandardJMeterEngine: All thread groups have been started
+2021-07-19 13:38:51,028 INFO o.a.j.t.JMeterThread: Thread started: Starship Enterprise - Life Support Systems 1-1
+2021-07-19 13:38:51,043 INFO o.a.j.p.h.s.HTTPHCAbstractImpl: Local host = Michels-Werk-MacBook-Pro.local
+2021-07-19 13:38:51,050 INFO o.a.j.p.h.s.HTTPHC4Impl: HTTP request retry count = 0
+2021-07-19 13:39:04,428 INFO o.a.j.g.a.Start: Stopping test
+2021-07-19 13:39:04,445 INFO o.a.j.t.JMeterThread: Stopping: Starship Enterprise - Life Support Systems 1-1
+2021-07-19 13:39:04,445 WARN o.a.j.t.JMeterThread: The delay timer was interrupted - probably did not wait as long as intended.
+2021-07-19 13:39:04,446 INFO o.a.j.t.JMeterThread: Thread finished: Starship Enterprise - Life Support Systems 1-1
+2021-07-19 13:39:04,447 INFO o.a.j.e.StandardJMeterEngine: Notifying test listeners of end of test
+2021-07-19 13:39:04,447 INFO o.a.j.g.u.JMeterMenuBar: setRunning(false, *local*)
+2021-07-19 13:41:31,540 INFO o.a.j.e.StandardJMeterEngine: Running the test!
+2021-07-19 13:41:31,541 INFO o.a.j.s.SampleEvent: List of sample_variables: []
+2021-07-19 13:41:31,542 INFO o.a.j.g.u.JMeterMenuBar: setRunning(true, *local*)
+2021-07-19 13:41:31,582 INFO o.a.j.e.StandardJMeterEngine: Starting ThreadGroup: 1 : Starship Enterprise - Life Support Systems
+2021-07-19 13:41:31,582 INFO o.a.j.e.StandardJMeterEngine: Starting 1 threads for group Starship Enterprise - Life Support Systems.
+2021-07-19 13:41:31,582 INFO o.a.j.e.StandardJMeterEngine: Thread will continue on error
+2021-07-19 13:41:31,582 INFO o.a.j.t.ThreadGroup: Starting thread group... number=1 threads=1 ramp-up=1 delayedStart=false
+2021-07-19 13:41:31,583 INFO o.a.j.t.ThreadGroup: Started thread group number 1
+2021-07-19 13:41:31,583 INFO o.a.j.e.StandardJMeterEngine: All thread groups have been started
+2021-07-19 13:41:31,583 INFO o.a.j.t.JMeterThread: Thread started: Starship Enterprise - Life Support Systems 1-1
+2021-07-19 13:41:31,604 INFO o.a.j.p.h.s.h.LazyLayeredConnectionSocketFactory: Setting up HTTPS TrustAll Socket Factory
+2021-07-19 13:41:31,610 INFO o.a.j.u.JsseSSLManager: Using default SSL protocol: TLS
+2021-07-19 13:41:31,610 INFO o.a.j.u.JsseSSLManager: SSL session context: per-thread
+2021-07-19 13:41:31,737 INFO o.a.j.u.SSLManager: JmeterKeyStore Location:  type JKS
+2021-07-19 13:41:31,740 INFO o.a.j.u.SSLManager: KeyStore created OK
+2021-07-19 13:41:31,740 WARN o.a.j.u.SSLManager: Keystore file not found, loading empty keystore
+2021-07-19 13:41:44,495 INFO o.a.j.g.a.Start: Stopping test
+2021-07-19 13:41:44,510 INFO o.a.j.t.JMeterThread: Stopping: Starship Enterprise - Life Support Systems 1-1
+2021-07-19 13:41:44,511 WARN o.a.j.t.JMeterThread: The delay timer was interrupted - probably did not wait as long as intended.
+2021-07-19 13:41:44,511 INFO o.a.j.t.JMeterThread: Thread finished: Starship Enterprise - Life Support Systems 1-1
+2021-07-19 13:41:44,514 INFO o.a.j.e.StandardJMeterEngine: Notifying test listeners of end of test
+2021-07-19 13:41:44,562 INFO o.a.j.g.u.JMeterMenuBar: setRunning(false, *local*)
+2021-07-19 13:42:19,158 INFO o.a.j.e.StandardJMeterEngine: Running the test!
+2021-07-19 13:42:19,158 INFO o.a.j.s.SampleEvent: List of sample_variables: []
+2021-07-19 13:42:19,159 INFO o.a.j.g.u.JMeterMenuBar: setRunning(true, *local*)
+2021-07-19 13:42:19,203 INFO o.a.j.e.StandardJMeterEngine: Starting ThreadGroup: 1 : Starship Enterprise - Life Support Systems
+2021-07-19 13:42:19,203 INFO o.a.j.e.StandardJMeterEngine: Starting 1 threads for group Starship Enterprise - Life Support Systems.
+2021-07-19 13:42:19,203 INFO o.a.j.e.StandardJMeterEngine: Thread will continue on error
+2021-07-19 13:42:19,203 INFO o.a.j.t.ThreadGroup: Starting thread group... number=1 threads=1 ramp-up=1 delayedStart=false
+2021-07-19 13:42:19,204 INFO o.a.j.t.ThreadGroup: Started thread group number 1
+2021-07-19 13:42:19,204 INFO o.a.j.e.StandardJMeterEngine: All thread groups have been started
+2021-07-19 13:42:19,204 INFO o.a.j.t.JMeterThread: Thread started: Starship Enterprise - Life Support Systems 1-1
+2021-07-19 13:42:24,742 INFO o.a.j.g.a.Start: Stopping test
+2021-07-19 13:42:24,757 INFO o.a.j.t.JMeterThread: Stopping: Starship Enterprise - Life Support Systems 1-1
+2021-07-19 13:42:24,757 WARN o.a.j.t.JMeterThread: The delay timer was interrupted - probably did not wait as long as intended.
+2021-07-19 13:42:24,758 INFO o.a.j.t.JMeterThread: Thread finished: Starship Enterprise - Life Support Systems 1-1
+2021-07-19 13:42:24,758 INFO o.a.j.e.StandardJMeterEngine: Notifying test listeners of end of test
+2021-07-19 13:42:24,774 INFO o.a.j.g.u.JMeterMenuBar: setRunning(false, *local*)
+2021-07-19 13:42:41,293 INFO o.a.j.e.StandardJMeterEngine: Running the test!
+2021-07-19 13:42:41,294 INFO o.a.j.s.SampleEvent: List of sample_variables: []
+2021-07-19 13:42:41,294 ERROR o.a.j.e.PreCompiler: invalid variables in node Ingest IOT data from Oxygen sensor
+org.apache.jmeter.functions.InvalidVariableException: Expected } after __time function call in  ${__time(yyyy-MM-dd HH:mm:ss.S)Z}
+	at org.apache.jmeter.engine.util.FunctionParser.makeFunction(FunctionParser.java:135) ~[ApacheJMeter_core.jar:5.3]
+	at org.apache.jmeter.engine.util.FunctionParser.compileString(FunctionParser.java:78) ~[ApacheJMeter_core.jar:5.3]
+	at org.apache.jmeter.engine.util.CompoundVariable.setParameters(CompoundVariable.java:180) ~[ApacheJMeter_core.jar:5.3]
+	at org.apache.jmeter.engine.util.FunctionParser.parseParams(FunctionParser.java:207) ~[ApacheJMeter_core.jar:5.3]
+	at org.apache.jmeter.engine.util.FunctionParser.makeFunction(FunctionParser.java:130) ~[ApacheJMeter_core.jar:5.3]
+	at org.apache.jmeter.engine.util.FunctionParser.compileString(FunctionParser.java:78) ~[ApacheJMeter_core.jar:5.3]
+	at org.apache.jmeter.engine.util.CompoundVariable.setParameters(CompoundVariable.java:180) ~[ApacheJMeter_core.jar:5.3]
+	at org.apache.jmeter.engine.util.ReplaceStringWithFunctions.transformValue(ReplaceStringWithFunctions.java:42) ~[ApacheJMeter_core.jar:5.3]
+	at org.apache.jmeter.engine.util.ValueReplacer.replaceValues(ValueReplacer.java:169) ~[ApacheJMeter_core.jar:5.3]
+	at org.apache.jmeter.engine.util.ValueReplacer.replaceValues(ValueReplacer.java:177) ~[ApacheJMeter_core.jar:5.3]
+	at org.apache.jmeter.engine.util.ValueReplacer.replaceValues(ValueReplacer.java:177) ~[ApacheJMeter_core.jar:5.3]
+	at org.apache.jmeter.engine.util.ValueReplacer.replaceValues(ValueReplacer.java:177) ~[ApacheJMeter_core.jar:5.3]
+	at org.apache.jmeter.engine.util.ValueReplacer.replaceValues(ValueReplacer.java:79) ~[ApacheJMeter_core.jar:5.3]
+	at org.apache.jmeter.engine.PreCompiler.addNode(PreCompiler.java:88) [ApacheJMeter_core.jar:5.3]
+	at org.apache.jorphan.collections.HashTree.traverseInto(HashTree.java:993) [jorphan.jar:5.3]
+	at org.apache.jorphan.collections.HashTree.traverseInto(HashTree.java:994) [jorphan.jar:5.3]
+	at org.apache.jorphan.collections.HashTree.traverse(HashTree.java:976) [jorphan.jar:5.3]
+	at org.apache.jmeter.engine.StandardJMeterEngine.run(StandardJMeterEngine.java:361) [ApacheJMeter_core.jar:5.3]
+	at java.lang.Thread.run(Thread.java:832) [?:?]
+2021-07-19 13:42:41,303 INFO o.a.j.g.u.JMeterMenuBar: setRunning(true, *local*)
+2021-07-19 13:42:41,343 INFO o.a.j.e.StandardJMeterEngine: Starting ThreadGroup: 1 : Starship Enterprise - Life Support Systems
+2021-07-19 13:42:41,343 INFO o.a.j.e.StandardJMeterEngine: Starting 1 threads for group Starship Enterprise - Life Support Systems.
+2021-07-19 13:42:41,343 INFO o.a.j.e.StandardJMeterEngine: Thread will continue on error
+2021-07-19 13:42:41,343 INFO o.a.j.t.ThreadGroup: Starting thread group... number=1 threads=1 ramp-up=1 delayedStart=false
+2021-07-19 13:42:41,344 INFO o.a.j.t.ThreadGroup: Started thread group number 1
+2021-07-19 13:42:41,344 INFO o.a.j.e.StandardJMeterEngine: All thread groups have been started
+2021-07-19 13:42:41,344 INFO o.a.j.t.JMeterThread: Thread started: Starship Enterprise - Life Support Systems 1-1
+2021-07-19 13:42:47,570 INFO o.a.j.g.a.Start: Stopping test
+2021-07-19 13:42:47,582 INFO o.a.j.t.JMeterThread: Stopping: Starship Enterprise - Life Support Systems 1-1
+2021-07-19 13:42:47,583 WARN o.a.j.t.JMeterThread: The delay timer was interrupted - probably did not wait as long as intended.
+2021-07-19 13:42:47,583 INFO o.a.j.t.JMeterThread: Thread finished: Starship Enterprise - Life Support Systems 1-1
+2021-07-19 13:42:47,583 INFO o.a.j.e.StandardJMeterEngine: Notifying test listeners of end of test
+2021-07-19 13:42:47,631 INFO o.a.j.g.u.JMeterMenuBar: setRunning(false, *local*)
+2021-07-19 13:43:43,099 INFO o.a.j.e.StandardJMeterEngine: Running the test!
+2021-07-19 13:43:43,100 INFO o.a.j.s.SampleEvent: List of sample_variables: []
+2021-07-19 13:43:43,100 INFO o.a.j.g.u.JMeterMenuBar: setRunning(true, *local*)
+2021-07-19 13:43:43,141 INFO o.a.j.e.StandardJMeterEngine: Starting ThreadGroup: 1 : Starship Enterprise - Life Support Systems
+2021-07-19 13:43:43,141 INFO o.a.j.e.StandardJMeterEngine: Starting 1 threads for group Starship Enterprise - Life Support Systems.
+2021-07-19 13:43:43,141 INFO o.a.j.e.StandardJMeterEngine: Thread will continue on error
+2021-07-19 13:43:43,141 INFO o.a.j.t.ThreadGroup: Starting thread group... number=1 threads=1 ramp-up=1 delayedStart=false
+2021-07-19 13:43:43,142 INFO o.a.j.t.ThreadGroup: Started thread group number 1
+2021-07-19 13:43:43,142 INFO o.a.j.e.StandardJMeterEngine: All thread groups have been started
+2021-07-19 13:43:43,142 INFO o.a.j.t.JMeterThread: Thread started: Starship Enterprise - Life Support Systems 1-1
+2021-07-19 13:43:52,995 INFO o.a.j.g.a.Start: Stopping test
+2021-07-19 13:43:53,010 INFO o.a.j.t.JMeterThread: Stopping: Starship Enterprise - Life Support Systems 1-1
+2021-07-19 13:43:53,010 WARN o.a.j.t.JMeterThread: The delay timer was interrupted - probably did not wait as long as intended.
+2021-07-19 13:43:53,011 INFO o.a.j.t.JMeterThread: Thread finished: Starship Enterprise - Life Support Systems 1-1
+2021-07-19 13:43:53,011 INFO o.a.j.e.StandardJMeterEngine: Notifying test listeners of end of test
+2021-07-19 13:43:53,011 INFO o.a.j.g.u.JMeterMenuBar: setRunning(false, *local*)
+2021-07-19 13:45:43,947 INFO o.a.j.e.StandardJMeterEngine: Running the test!
+2021-07-19 13:45:43,947 INFO o.a.j.s.SampleEvent: List of sample_variables: []
+2021-07-19 13:45:43,948 INFO o.a.j.g.u.JMeterMenuBar: setRunning(true, *local*)
+2021-07-19 13:45:43,992 INFO o.a.j.e.StandardJMeterEngine: Starting ThreadGroup: 1 : Starship Enterprise - Life Support Systems
+2021-07-19 13:45:43,992 INFO o.a.j.e.StandardJMeterEngine: Starting 1 threads for group Starship Enterprise - Life Support Systems.
+2021-07-19 13:45:43,992 INFO o.a.j.e.StandardJMeterEngine: Thread will continue on error
+2021-07-19 13:45:43,992 INFO o.a.j.t.ThreadGroup: Starting thread group... number=1 threads=1 ramp-up=1 delayedStart=false
+2021-07-19 13:45:43,993 INFO o.a.j.t.ThreadGroup: Started thread group number 1
+2021-07-19 13:45:43,993 INFO o.a.j.e.StandardJMeterEngine: All thread groups have been started
+2021-07-19 13:45:43,993 INFO o.a.j.t.JMeterThread: Thread started: Starship Enterprise - Life Support Systems 1-1
+2021-07-19 13:45:54,702 INFO o.a.j.g.a.Start: Stopping test
+2021-07-19 13:45:54,726 INFO o.a.j.t.JMeterThread: Stopping: Starship Enterprise - Life Support Systems 1-1
+2021-07-19 13:45:54,727 WARN o.a.j.t.JMeterThread: The delay timer was interrupted - probably did not wait as long as intended.
+2021-07-19 13:45:54,727 INFO o.a.j.t.JMeterThread: Thread finished: Starship Enterprise - Life Support Systems 1-1
+2021-07-19 13:45:54,728 INFO o.a.j.e.StandardJMeterEngine: Notifying test listeners of end of test
+2021-07-19 13:45:54,787 INFO o.a.j.g.u.JMeterMenuBar: setRunning(false, *local*)
+2021-07-19 13:47:16,211 INFO o.a.j.e.StandardJMeterEngine: Running the test!
+2021-07-19 13:47:16,211 INFO o.a.j.s.SampleEvent: List of sample_variables: []
+2021-07-19 13:47:16,212 INFO o.a.j.g.u.JMeterMenuBar: setRunning(true, *local*)
+2021-07-19 13:47:16,254 INFO o.a.j.e.StandardJMeterEngine: Starting ThreadGroup: 1 : Starship Enterprise - Life Support Systems
+2021-07-19 13:47:16,255 INFO o.a.j.e.StandardJMeterEngine: Starting 1 threads for group Starship Enterprise - Life Support Systems.
+2021-07-19 13:47:16,255 INFO o.a.j.e.StandardJMeterEngine: Thread will continue on error
+2021-07-19 13:47:16,255 INFO o.a.j.t.ThreadGroup: Starting thread group... number=1 threads=1 ramp-up=1 delayedStart=false
+2021-07-19 13:47:16,255 INFO o.a.j.t.ThreadGroup: Started thread group number 1
+2021-07-19 13:47:16,255 INFO o.a.j.e.StandardJMeterEngine: All thread groups have been started
+2021-07-19 13:47:16,256 INFO o.a.j.t.JMeterThread: Thread started: Starship Enterprise - Life Support Systems 1-1
+2021-07-19 13:47:29,956 INFO o.a.j.g.a.Start: Stopping test
+2021-07-19 13:47:29,972 INFO o.a.j.t.JMeterThread: Stopping: Starship Enterprise - Life Support Systems 1-1
+2021-07-19 13:47:29,972 WARN o.a.j.t.JMeterThread: The delay timer was interrupted - probably did not wait as long as intended.
+2021-07-19 13:47:29,972 INFO o.a.j.t.JMeterThread: Thread finished: Starship Enterprise - Life Support Systems 1-1
+2021-07-19 13:47:29,973 INFO o.a.j.e.StandardJMeterEngine: Notifying test listeners of end of test
+2021-07-19 13:47:29,974 INFO o.a.j.g.u.JMeterMenuBar: setRunning(false, *local*)
+2021-07-19 13:47:41,091 INFO o.a.j.e.StandardJMeterEngine: Running the test!
+2021-07-19 13:47:41,091 INFO o.a.j.s.SampleEvent: List of sample_variables: []
+2021-07-19 13:47:41,092 INFO o.a.j.g.u.JMeterMenuBar: setRunning(true, *local*)
+2021-07-19 13:47:41,137 INFO o.a.j.e.StandardJMeterEngine: Starting ThreadGroup: 1 : Starship Enterprise - Life Support Systems
+2021-07-19 13:47:41,137 INFO o.a.j.e.StandardJMeterEngine: Starting 1 threads for group Starship Enterprise - Life Support Systems.
+2021-07-19 13:47:41,137 INFO o.a.j.e.StandardJMeterEngine: Thread will continue on error
+2021-07-19 13:47:41,137 INFO o.a.j.t.ThreadGroup: Starting thread group... number=1 threads=1 ramp-up=1 delayedStart=false
+2021-07-19 13:47:41,138 INFO o.a.j.t.ThreadGroup: Started thread group number 1
+2021-07-19 13:47:41,138 INFO o.a.j.e.StandardJMeterEngine: All thread groups have been started
+2021-07-19 13:47:41,138 INFO o.a.j.t.JMeterThread: Thread started: Starship Enterprise - Life Support Systems 1-1
+2021-07-19 13:47:58,851 INFO o.a.j.g.a.Start: Stopping test
+2021-07-19 13:47:58,871 INFO o.a.j.t.JMeterThread: Stopping: Starship Enterprise - Life Support Systems 1-1
+2021-07-19 13:47:58,872 WARN o.a.j.t.JMeterThread: The delay timer was interrupted - probably did not wait as long as intended.
+2021-07-19 13:47:58,872 INFO o.a.j.t.JMeterThread: Thread finished: Starship Enterprise - Life Support Systems 1-1
+2021-07-19 13:47:58,873 INFO o.a.j.e.StandardJMeterEngine: Notifying test listeners of end of test
+2021-07-19 13:47:58,874 INFO o.a.j.g.u.JMeterMenuBar: setRunning(false, *local*)
+2021-07-19 13:48:31,362 INFO o.a.j.e.StandardJMeterEngine: Running the test!
+2021-07-19 13:48:31,363 INFO o.a.j.s.SampleEvent: List of sample_variables: []
+2021-07-19 13:48:31,363 INFO o.a.j.g.u.JMeterMenuBar: setRunning(true, *local*)
+2021-07-19 13:48:31,412 INFO o.a.j.e.StandardJMeterEngine: Starting ThreadGroup: 1 : Starship Enterprise - Life Support Systems
+2021-07-19 13:48:31,412 INFO o.a.j.e.StandardJMeterEngine: Starting 1 threads for group Starship Enterprise - Life Support Systems.
+2021-07-19 13:48:31,412 INFO o.a.j.e.StandardJMeterEngine: Thread will continue on error
+2021-07-19 13:48:31,412 INFO o.a.j.t.ThreadGroup: Starting thread group... number=1 threads=1 ramp-up=1 delayedStart=false
+2021-07-19 13:48:31,413 INFO o.a.j.t.ThreadGroup: Started thread group number 1
+2021-07-19 13:48:31,413 INFO o.a.j.e.StandardJMeterEngine: All thread groups have been started
+2021-07-19 13:48:31,413 INFO o.a.j.t.JMeterThread: Thread started: Starship Enterprise - Life Support Systems 1-1
+2021-07-19 13:48:35,235 INFO o.a.j.g.a.Start: Stopping test
+2021-07-19 13:48:35,250 INFO o.a.j.t.JMeterThread: Stopping: Starship Enterprise - Life Support Systems 1-1
+2021-07-19 13:48:35,250 WARN o.a.j.t.JMeterThread: The delay timer was interrupted - probably did not wait as long as intended.
+2021-07-19 13:48:35,251 INFO o.a.j.t.JMeterThread: Thread finished: Starship Enterprise - Life Support Systems 1-1
+2021-07-19 13:48:35,251 INFO o.a.j.e.StandardJMeterEngine: Notifying test listeners of end of test
+2021-07-19 13:48:35,268 INFO o.a.j.g.u.JMeterMenuBar: setRunning(false, *local*)
+2021-07-19 13:49:00,344 INFO o.a.j.e.StandardJMeterEngine: Running the test!
+2021-07-19 13:49:00,344 INFO o.a.j.s.SampleEvent: List of sample_variables: []
+2021-07-19 13:49:00,345 INFO o.a.j.g.u.JMeterMenuBar: setRunning(true, *local*)
+2021-07-19 13:49:00,393 INFO o.a.j.e.StandardJMeterEngine: Starting ThreadGroup: 1 : Starship Enterprise - Life Support Systems
+2021-07-19 13:49:00,393 INFO o.a.j.e.StandardJMeterEngine: Starting 1 threads for group Starship Enterprise - Life Support Systems.
+2021-07-19 13:49:00,393 INFO o.a.j.e.StandardJMeterEngine: Thread will continue on error
+2021-07-19 13:49:00,393 INFO o.a.j.t.ThreadGroup: Starting thread group... number=1 threads=1 ramp-up=1 delayedStart=false
+2021-07-19 13:49:00,394 INFO o.a.j.t.ThreadGroup: Started thread group number 1
+2021-07-19 13:49:00,394 INFO o.a.j.e.StandardJMeterEngine: All thread groups have been started
+2021-07-19 13:49:00,394 INFO o.a.j.t.JMeterThread: Thread started: Starship Enterprise - Life Support Systems 1-1
+2021-07-19 13:49:04,622 INFO o.a.j.g.a.Start: Stopping test
+2021-07-19 13:49:04,643 INFO o.a.j.t.JMeterThread: Stopping: Starship Enterprise - Life Support Systems 1-1
+2021-07-19 13:49:04,643 WARN o.a.j.t.JMeterThread: The delay timer was interrupted - probably did not wait as long as intended.
+2021-07-19 13:49:04,643 INFO o.a.j.t.JMeterThread: Thread finished: Starship Enterprise - Life Support Systems 1-1
+2021-07-19 13:49:04,644 INFO o.a.j.e.StandardJMeterEngine: Notifying test listeners of end of test
+2021-07-19 13:49:04,660 INFO o.a.j.g.u.JMeterMenuBar: setRunning(false, *local*)
+2021-07-19 13:49:10,298 INFO o.a.j.e.StandardJMeterEngine: Running the test!
+2021-07-19 13:49:10,298 INFO o.a.j.s.SampleEvent: List of sample_variables: []
+2021-07-19 13:49:10,299 INFO o.a.j.g.u.JMeterMenuBar: setRunning(true, *local*)
+2021-07-19 13:49:10,347 INFO o.a.j.e.StandardJMeterEngine: Starting ThreadGroup: 1 : Starship Enterprise - Life Support Systems
+2021-07-19 13:49:10,347 INFO o.a.j.e.StandardJMeterEngine: Starting 1 threads for group Starship Enterprise - Life Support Systems.
+2021-07-19 13:49:10,347 INFO o.a.j.e.StandardJMeterEngine: Thread will continue on error
+2021-07-19 13:49:10,347 INFO o.a.j.t.ThreadGroup: Starting thread group... number=1 threads=1 ramp-up=1 delayedStart=false
+2021-07-19 13:49:10,348 INFO o.a.j.t.ThreadGroup: Started thread group number 1
+2021-07-19 13:49:10,348 INFO o.a.j.e.StandardJMeterEngine: All thread groups have been started
+2021-07-19 13:49:10,348 INFO o.a.j.t.JMeterThread: Thread started: Starship Enterprise - Life Support Systems 1-1
+2021-07-19 13:49:31,251 INFO o.a.j.g.a.Start: Stopping test
+2021-07-19 13:49:31,265 INFO o.a.j.t.JMeterThread: Stopping: Starship Enterprise - Life Support Systems 1-1
+2021-07-19 13:49:31,266 WARN o.a.j.t.JMeterThread: The delay timer was interrupted - probably did not wait as long as intended.
+2021-07-19 13:49:31,266 INFO o.a.j.t.JMeterThread: Thread finished: Starship Enterprise - Life Support Systems 1-1
+2021-07-19 13:49:31,266 INFO o.a.j.e.StandardJMeterEngine: Notifying test listeners of end of test
+2021-07-19 13:49:31,267 INFO o.a.j.g.u.JMeterMenuBar: setRunning(false, *local*)
+2021-07-19 14:34:36,644 INFO o.a.j.e.StandardJMeterEngine: Running the test!
+2021-07-19 14:34:36,646 INFO o.a.j.s.SampleEvent: List of sample_variables: []
+2021-07-19 14:34:36,646 INFO o.a.j.g.u.JMeterMenuBar: setRunning(true, *local*)
+2021-07-19 14:34:36,695 INFO o.a.j.e.StandardJMeterEngine: Starting ThreadGroup: 1 : Starship Enterprise - Life Support Systems
+2021-07-19 14:34:36,696 INFO o.a.j.e.StandardJMeterEngine: Starting 1 threads for group Starship Enterprise - Life Support Systems.
+2021-07-19 14:34:36,696 INFO o.a.j.e.StandardJMeterEngine: Thread will continue on error
+2021-07-19 14:34:36,696 INFO o.a.j.t.ThreadGroup: Starting thread group... number=1 threads=1 ramp-up=1 delayedStart=false
+2021-07-19 14:34:36,696 INFO o.a.j.t.ThreadGroup: Started thread group number 1
+2021-07-19 14:34:36,696 INFO o.a.j.e.StandardJMeterEngine: All thread groups have been started
+2021-07-19 14:34:36,696 INFO o.a.j.t.JMeterThread: Thread started: Starship Enterprise - Life Support Systems 1-1
+2021-07-19 14:39:35,721 INFO o.a.j.t.JMeterThread: Thread finished: Starship Enterprise - Life Support Systems 1-1
+2021-07-19 14:39:35,724 INFO o.a.j.e.StandardJMeterEngine: Notifying test listeners of end of test
+2021-07-19 14:39:35,724 INFO o.a.j.g.u.JMeterMenuBar: setRunning(false, *local*)

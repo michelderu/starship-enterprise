@@ -2,8 +2,8 @@
 
 const cassandra = require('cassandra-driver');
 const secureConnectPath = process.env['ASTRA_SECURE_CONNECT_BUNDLE'];
-const username = process.env['ASTRA_DB_USERNAME'];
-const password = process.env['ASTRA_DB_PASSWORD'];
+const username = process.env['ASTRA_CLIENT_ID'];
+const password = process.env['ASTRA_CLIENT_SECRET'];
 const monitorSMSNumber = process.env['MONITOR_SMS_NUMBER'];
 const keyspace = 'life_support_systems';
 const table = 'sensor_data';
@@ -13,8 +13,8 @@ const sns = new AWS.SNS();
 
 // Some sanity checking
 if (!secureConnectPath) throw new Error('Environment variable ASTRA_SECURE_CONNECT_BUNDLE not set');
-if (!username) throw new Error('Environment variable ASTRA_DB_USERNAME not set');
-if (!password) throw new Error('Environment variable ASTRA_DB_PASSWORD not set');
+if (!username) throw new Error('Environment variable ASTRA_CLIENT_ID not set');
+if (!password) throw new Error('Environment variable ASTRA_CLIENT_SECRET not set');
 if (!monitorSMSNumber) throw new Error('Environment variable MONITOR_SMS_NUMBER not set');
 
 // useful for determining container re-use
@@ -95,6 +95,7 @@ async function addSensorReading(yyyymmddhhmm, updated, ship, sensor, reading) {
   };
 }
 
+// Get a rolling 1 minute reading based on the ship and sensor
 async function getReading(yyyymmddhhmm, ship, sensor) {
   const params = [ yyyymmddhhmm, ship, sensor ];
   const result = await client.execute(minuteQuery, params, { prepare : true });
@@ -108,6 +109,7 @@ async function getReading(yyyymmddhhmm, ship, sensor) {
   };
 }
 
+// Send an alert to a SMS consumer
 async function sendSMS(receiver, sender, message) {
   console.log("Sending message", message, "to receiver", receiver);
 
@@ -117,12 +119,12 @@ async function sendSMS(receiver, sender, message) {
       PhoneNumber: receiver,
       MessageAttributes: {
         'AWS.SNS.SMS.SenderID': {
-          DataType: 'String',
-          StringValue: sender
+          'DataType': 'String',
+          'StringValue': sender
         },
         'AWS.SNS.SMS.SMSType': {
-          DataType: 'String',
-          StringValue: 'Promotional'
+          'DataType': 'String',
+          'StringValue': 'Promotional'
         }
       }
     }).promise();
@@ -141,8 +143,10 @@ async function sendSMS(receiver, sender, message) {
   }
 }
 
+// Continously monitor the oxygen and send an alert if the level drops below 18 ppm
 async function monitorOxygen() {
   const time = new Date();
+  // Get the rolling window of a minute
   const yyyymmddhhmm = time.getFullYear() + ('0' + (time.getMonth()+1)).slice(-2) + ('0' + (time.getDate())).slice(-2) + ('0' + (time.getHours()+2)).slice(-2) + ('0' + (time.getMinutes())).slice(-2);
 
   console.log ("Checking oxygen levels in the rolling minute window", yyyymmddhhmm);

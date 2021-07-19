@@ -1,4 +1,4 @@
-# Starship Enterprise IOT Demo
+# 🚀 Starship Enterprise IOT Demo 🚀
 Welcome to the Starship Enterprise Fleet! And congratulations, you're the Safety Manager responsible for the safety of all personnel.  
 The single most important safety issue is the quality of oxygen. No oxygen == No people!  
 In order to maximise safety on each ship an extensive monitoring system has been implemented by you for life support. This monitoring system takes information from thousands of systems and stores it securely in a scalable Cassandra architecture.  
@@ -8,9 +8,9 @@ The ultime goale is to create a full serverless application that utilizes the se
 
 ![AWS Architecture Goal](diagrams/aws-architecture.png)
 
-## Components in the demo
+## 1️⃣ Components in the demo
 ### Database
-The database being used is deployed on the Datastax Astra SaaS offering because of:
+The database being used is deployed on the Datastax Astra DBaaS offering because of:
 - No Ops, just use it in a serverless fashion!
 - Cloud native
 - Zero lock-in
@@ -37,7 +37,7 @@ In order to package the application nicely in a devops environment https://serve
 #### Python app
 For reference, and showing the flexibility of the Datastax platform, there is also a Python app that monitors the sensor information and triggers alerts when needed.
 
-## Data model design
+## 2️⃣ Data model design
 ### Keyspace
 In order to group all information of the life support systems together, we'll utilize the keyspace `life_support_systems`.
 ### Table structure
@@ -73,43 +73,147 @@ LIMIT 1;
 ```
 This will retrieve all oxygen reading from the current rolling minut window, with the oxygen value sorted in an ascending order. So the smallest value will be first, easily allowing to check if it's < 18. Limiting to 1 gives us the number we're interested in.
 
-## Some personal notes: Experience during development
-1. Repeatedly receieved 500 errors call REST endpoints, even after creating a new Astra DB
-2. No extended logging information available apart from REST responses saying little (i.e.: "unable to execute create table query" with error code 500)
-3. Reached out to Astra support (Sebastian) who is now helping me
-4. Actual response from the support team: 
-"Looks like we have an issue related to a timeout on the table create call that is being fixed as we speak. To confirm that this is the issue can you check in cqlsh and see if the table is there?"
-5. The support team fixed the issue in about 10 minutes and I could proceed.
+## 3️⃣ Setting up Astra
+For purposes of showing off, we're going to utilize several methods for setting up the Astra database.
+1. First we'll use [Terraform](https://www.terraform.io) using the [DataStax Astra Provider](https://registry.terraform.io/providers/datastax/astra/latest/docs) to create the database in the region of our choice.
+2. Then we'll use the [REST API](https://docs.datastax.com/en/astra/docs/getting-started-with-datastax-astra.html) to create the table.
 
-## Setting up Astra using REST
-All activities are relative to the `./astra` directory!
+All Terraform activities are relative to the `./terraform` directory!
 
-### Set up the database on Astra
-Point your browser to https://astra.datastax.com and create a new database
-- Database name: starship_enterprise;
-- Keyspace: life_support_systems.
-Note the cluster ID for follow up actions.
-
-### Set up the environment variables
-Edit `astra_environment.txt` to match the Astra Cluster ID and Region.
-
-### Get the Authorization Token for REST activities
-Create a file `astra_credentials.txt` that contains the username and password as such:
+### Set up Terraform
+This guide assumes a Mac OSX environment:
 ```sh
-export ASTRA_DB_USERNAME=<your username>
-export ASTRA_DB_PASSWORD=<your password>
+brew tap hashicorp/tap
+brew install hashicorp/tap/terraform
+brew update
+brew upgrade hashicorp/tap/terraform
 ```
-Now run `./getAuthToken.sh`.  
-Note the token in the response, we'll need it for the step below and for the JMeter simulation.  
-  
-Create a file `astra_token.txt` that contains the token as such:
+Validate the installation by running:
 ```sh
-ASTRA_AUTHORIZATION_TOKEN=<your token>
+terraform -help
 ```
 
-### Create the needed tables
+### Grab and set the security token for your Astra database
+Go to [Astra Token Management](https://astra.datastax.com/org/a056b285-9d65-430a-bf68-3778e99f8a6c/settings/tokens) and create a new security token. To make life simple, for now we'll create an *Administrator User* role. Make sure you save the `.csv` file for later reference.
+
+Now set the environment variable `ASTRA_API_TOKEN` so it can be used by Terraform:
+```sh
+export ASTRA_API_TOKEN=<your-token>
+```
+
+### Configure the Astra provider for Terraform
+Create a file called `main.tf` and paste the following:
+```js
+// Define the Astra provider for Terraform
+terraform {
+  required_providers {
+    astra = {
+      source = "datastax/astra"
+      version = "0.0.5-pre"
+    }
+  }
+}
+
+// Provide your Astra token
+provider "astra" {
+    // Will read from environment variable ASTRA_API_TOKEN, else define as follows:
+    // token =
+}
+```
+Then run `terraform init`.
+
+### Choose your Astra cloud provider and region
+With Astra you have a choice of running your database on either AWS, GCP or Azure and within a choice of regions as well. To find out which regions are available, add the following to `main.tf`:
+```js
+// Get the regions that are available within Astra
+data "astra_available_regions" "regions" {
+}
+
+// Output the regions
+output "available_regions" {
+  value = [for region in data.astra_available_regions.regions.results : "${region.cloud_provider}, ${region.region}, ${region.tier}" if region.tier == "serverless"]
+}
+```
+Now run `terraform plan` and note the cloud providers and their regions.
+
+### Create a new database
+Pick a cloud provider and region from the previous list. As we'll create a fille serverless stack and will use [AWS Lambda](https://aws.amazon.com/lambda/) it makes sense to choose *AWS* as the cloud provider and the region where you'll run your serverless functions. In our case those are:
+- Cloud provider: AWS
+- Region: eu-central-1
+
+With this information create the following `main.tf`:
+```js
+// Define the Astra provider for Terraform
+terraform {
+  required_providers {
+    astra = {
+      source = "datastax/astra"
+      version = "0.0.5-pre"
+    }
+  }
+}
+
+// Provide your Astra token
+provider "astra" {
+    // Will read from environment variable ASTRA_API_TOKEN, else define as follows:
+    // token =
+}
+
+// Create the database and initial keyspace
+resource "astra_database" "dev" {
+  name           = "starship_enterprise"
+  keyspace       = "life_support_systems"
+  cloud_provider = "AWS"
+  region         = "eu-central-1"
+}
+
+// Get the location of the secure connect bundle
+data "astra_secure_connect_bundle_url" "dev" {
+  database_id = astra_database.dev.id
+}
+
+// Output the created database id
+output "database_id" {
+  value = astra_database.dev.id
+}
+
+// Output the download location for the secure connect bundle
+output "secure_connect_bundle_url" {
+  value = data.astra_secure_connect_bundle_url.dev.url
+}
+```
+Now run `terraform plan` to see what actions are going to be taken. When you're happy, run `terraform apply` and type `yes`.
+
+Terraform will now create the Astra database and upon completion provide:
+- The database id. Take note of it!
+- The download location for the secure connect bundle. It will be available for download for 5 minutes.
+
+### Download the secure connect bundle
+The secure connect bundle contains all information to set up a TLS encrypted tunnel between client and the Astra server.
+
+Copy the URL from above and paste it here:
+```sh
+wget -O secure_connect_bundle.zip "<url>"
+```
+
+### Set up token and secrets to be used later on
+All REST API activities are relative to the `./astra` directory!
+
+First set up the environment variables:
+1. Edit `astra_environment.txt` to match the Astra Cluster ID and Region.
+2. Create a file `astra_token.txt` that contains the token you previously generated:
+```sh
+export ASTRA_DB_APPLICATION_TOKEN=<your-token>
+```
+3. Create a file `astra_credentials.txt` that contains the Client Id and Client Secret you generated while creating a token:
+```sh
+export ASTRA_CLIENT_ID=<your-client-id>
+export ASTRA_CLIENT_SECRET=<your-client-secret>
+```
+
+### Create the necessary tables
 Run: `./createTables.sh`. Take a look at the embedded REST call.  
-This will create the oxygen_filter table that accepts information from the oxygen IOT sensor.
+This will first drop and then create the oxygen_filter table that accepts information from the oxygen IOT sensor.
 
 ### Add some test rows into the table
 Run: `./addRows.sh`. Take a look at the embedded REST call.
@@ -118,7 +222,7 @@ Run: `./addRows.sh`. Take a look at the embedded REST call.
 Run: `./query.sh`. Take a look at the embedded REST call.  
 Take note of the automatic order done by the cluster!
 
-## Simulate the oxygen IOT device
+## 4️⃣ Simulate the oxygen IOT device
 
 ### IOT data generation
 In 98% of the time we generate a normal O value of 18-22, the other 2% we generate outliers from 14-17.  
@@ -138,73 +242,99 @@ ${__setProperty(yyyymmddhhmm, ${__time(yyyyMMddHHmm)}, False)}
 
 ### Spin up JMeter and hit the rows endpoint to load IOT data
 In this demo we'll use JMeter to simulate a data feed coming from an oxygen level sensor in the filter room of the life support system in the space ship.  
-Run `apache-jmeter-5.3/bin/jmeter.sh` and load `Oxygen Filter Simulation.jmx`.  
-***Important:*** Update the Authorization Token in the Astra REST headers section (x-cassandra-token). In case you need to renew the token, run `getAuthToken.sh` in `./astra`.  
-Hit the run button to start the simulation that loads IOT data into Astra. JMeter will ingest a value every second for a period of 5 minutes (enough for testing).
+1. Run `apache-jmeter-5.3/bin/jmeter.sh` and load `Oxygen Filter Simulation.jmx`.  
+2. Update the `Connection Settings` in the testplan to match the Astra Database and Token.
+3. Hit the run button to start the simulation that loads IOT data into Astra. JMeter will ingest a value every second for a period of 5 minutes (enough for testing).
 
-## Python Monitoring App
+## 5️⃣ Python Monitoring App
 All activities are relative to the `./python-monitoring` directory!
 
 ### Design
-Credentials are taken from the `./astra/credentials.txt` file.  
+Secrets are taken from the `./astra/credentials.txt` file.  
 The app connects to Astra using the Secure Connect Bundle.  
 Every 5 seconds the app checks if there is an outlier in the oxygen values for the rolling minute window. This is scheduled using the `schedule` package.  
 The query we use is documented above. Whenever we retrieve a value that is smaller than 18, an alert goes off.
 
 ### Run the IOT monitoring process
-First download the secure connect bundle from Astra and place the zip in `./python-monitoring`. Make sure to update the filename in environment variable `ASTRA_SECURE_CONNECT_BUNDLE` in `run_monitoring.sh`.  
-Then make sure your Astra credentials are correctly stored in `./astra/credentials.txt`. 
-Now install the cassandra driver: `pip3 install cassandra-driver`.  
+Make sure your Astra secrets are correctly stored in `./astra/credentials.txt`. 
+Now install the cassandra driver and schedule: `pip3 install cassandra-driver schedule`.  
 Optional: Check the cassandra driver availability: `python3 -c 'import cassandra; print (cassandra.__version__)'`.  
 Make sure JMeter is firing the endpoint to simulate the oxygen sensor.    
-Now run `run_monitoring.sh`.
+Now run `./run_monitoring.sh` and see the magic happen.
 
-## AWS cloud-native Monitoring App
+## 6️⃣ AWS cloud-native Monitoring App
 All activities are relative to the `./aws-monitoring` directory!
 
 ### Design
-The cloud-native solutions uses a full serverless design. No need for standing up nodes anymore!  
+The cloud-native solution uses a full serverless design. No need for provisioning compute nodes anymore!  
 To ease the devops process, we make use of the wunderful https://serverless.com framework.
 
+As we're running a safety monitoring application we want latencies to be as low as possible. Therefore make sure you deploy your Serverless Functions to the same region where your Astra Database is running.
+
+After deploying the following endpoints will be available (where the URL is dynamic of course):
+  POST - https://f8nfklyolb.execute-api.eu-central-1.amazonaws.com/dev/createSchema
+  POST - https://f8nfklyolb.execute-api.eu-central-1.amazonaws.com/dev/addSensorReading
+  GET - https://f8nfklyolb.execute-api.eu-central-1.amazonaws.com/dev/getReading
+  POST - https://f8nfklyolb.execute-api.eu-central-1.amazonaws.com/dev/test/send
+  GET - https://f8nfklyolb.execute-api.eu-central-1.amazonaws.com/dev/monitorOxygen
+
+These endpoints have been programmed using Node.js and are available in `handler.js`.
+
 ### Set up Serverless and deploy to AWS
-1. `npm install -g serverless`
-2. Go to AWS and create an IAM user for serverless (programmatic access and admin access). Note the credentials.
-3. Configure serverless credentials like `serverless config credentials --provider aws --key <KEY> --secret <SECRET>`.
-4. Go to AWS and create an S3 bucket (make sure to use the same region).
-5. Configure the region and bucket in serverless.yml.
-6. Download the secure connect bundle fro Astra and put the zip into the `aws-monitoring` directory so it will be packaged.
-7. Install Node.js dependencies
-```sh
-cd aws-monitoring
-npm install cassandra-driver
-npm install aws-sdk
+1. `npm install -g serverless` (make sure you have [Node.js LTS](https://nodejs.org/en/) installed)
+2. Go to [AWS](https://aws.amazon.com/) and login into your account. Then create an IAM user for serverless (Programmatic Access and AdministratorAccess policy). Note the credentials.
+3. Configure AWS credentials for Serverless like `serverless config credentials --provider aws --key <KEY> --secret <SECRET>`.
+4. Browse to AWS and create an *AWS S3 bucket* (make sure to use the same region as your Astra Database). This is where your serverless code will be deployed.
+5. Configure your *AWS SNS Service* SMS sandbox to allow messages to be sent to your Cell Phone Number. 
+6. Configure the region and bucket in `serverless.yml`.
+```yaml
+  region: eu-central-1
+  deploymentBucket:
+    name: astra-starship
 ```
-8. Deploy the serverless functions running `sls deploy`.
+7. Make the Secure Connect Bundle available for packaging by copying it from the `terraform` directory to the `aws-monitoring` directory by running `cp ../terraform/secure_connect_bundle.zip .`.
+8. Configure the secrets of the Astra database in `serverless.yml`. Also configure your Cell Phone Number for recieving SMS messages:
+```yaml
+  environment:
+      ASTRA_SECURE_CONNECT_BUNDLE: ../terraform/secure_connect_bundle.zip
+      ASTRA_CLIENT_ID: <your-client-id>
+      ASTRA_CLIENT_SECRET: <your-client-secret>
+      ASTRA_DB_APPLICATION_TOKEN: <your-token>
+      MONITOR_SMS_NUMBER: +31612345678
+```
+9. Install Node.js dependencies
+```sh
+npm install cassandra-driver aws-sdk
+```
+10. Deploy the serverless functions running `sls deploy`.
+
+### Debugging the serverless functions
+Find *Cloud Watch* on AWS and click on *Log Groups*. Here you will find logs for your functions.
 
 ### Create the oxygen_filter table in the life_support_systems keyspace (if not done already, or drop it)
 Call the AWS Lambda REST endpoint (replace the URL to match your instance):
 ```sh
-curl -X POST https://2qx7yo740c.execute-api.eu-west-1.amazonaws.com/dev/createSchema
+curl -X POST https://f8nfklyolb.execute-api.eu-central-1.amazonaws.com/dev/createSchema
 ```
 
 ### Add some test data (for the demo, use JMeter explained above)
 Call the AWS Lambda rest endpoint:
 ```sh
-curl -X POST -d '{"yyyymmddhhmm": "202008161210", "updated": "2020-08-16 12:10:31.020", "ship": "Starship Astra", "sensor": "oxygen", "reading": 18}' https://2qx7yo740c.execute-api.eu-west-1.amazonaws.com/dev/addSensorReading
-curl -X POST -d '{"yyyymmddhhmm": "202008161210", "updated": "2020-08-16 12:10:31.020", "ship": "Starship Astra", "sensor": "oxygen", "reading": 20}' https://2qx7yo740c.execute-api.eu-west-1.amazonaws.com/dev/addSensorReading
-curl -X POST -d '{"yyyymmddhhmm": "202008161210", "updated": "2020-08-16 12:10:31.020", "ship": "Starship Astra", "sensor": "oxygen", "reading": 17}' https://2qx7yo740c.execute-api.eu-west-1.amazonaws.com/dev/addSensorReading
+curl -X POST -d '{"yyyymmddhhmm": "202008161210", "updated": "2020-08-16T12:10:31.020Z", "ship": "Starship Astra", "sensor": "oxygen", "reading": 18}' https://f8nfklyolb.execute-api.eu-central-1.amazonaws.com/dev/addSensorReading
+curl -X POST -d '{"yyyymmddhhmm": "202008161210", "updated": "2020-08-16T12:10:31.021Z", "ship": "Starship Astra", "sensor": "oxygen", "reading": 20}' https://f8nfklyolb.execute-api.eu-central-1.amazonaws.com/dev/addSensorReading
+curl -X POST -d '{"yyyymmddhhmm": "202008161210", "updated": "2020-08-16T12:10:31.022Z", "ship": "Starship Astra", "sensor": "oxygen", "reading": 17}' https://f8nfklyolb.execute-api.eu-central-1.amazonaws.com/dev/addSensorReading
 ```
 
 ### Test querying the test data
 Call the AWS Lambda rest endpoint (some variables haven been hardcoded for the sake of time):
 ```sh
-curl -X GET https://2qx7yo740c.execute-api.eu-west-1.amazonaws.com/dev/getReading
+curl -X GET https://f8nfklyolb.execute-api.eu-central-1.amazonaws.com/dev/getReading
 ```
 
 ### Test sending an SMS
 Call the rest endpoint which on it's turn cals the SNS service of AWS to send an SMS:
 ```sh
-curl -X POST -d '{"receiver": "+31638507567", "sender": "Starship", "message": "This is a test message"}' https://2qx7yo740c.execute-api.eu-west-1.amazonaws.com/dev/test/send
+curl -X POST -d '{"receiver": "+31638507567", "sender": "Starship", "message": "This is a test message"}' https://f8nfklyolb.execute-api.eu-central-1.amazonaws.com/dev/test/send
 ```
 
 ### Test monitoring
@@ -217,4 +347,4 @@ curl -X GET https://2qx7yo740c.execute-api.eu-west-1.amazonaws.com/dev/monitorOx
 ### Operationalize the monitoring process
 Update `serverless.yml` and change `enabled: false` to `enabled: true ` for function `monitorOxygen`. Also update `MONITOR_SMS_NUMBER` in `serverless.yml` to match your cell phone number.  
 Run `sls deploy` and sit back!  
-***Important:*** Make sure to change enabled back to false and run another deploy. Else the monitoring app keeps running which will incur a cost!
+***Important:*** Make sure to change enabled back to false and run another deploy. Else the monitoring app keeps running which will incur cost!
