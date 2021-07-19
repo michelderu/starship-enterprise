@@ -14,8 +14,9 @@ The database being used is deployed on the Datastax Astra DBaaS offering because
 - No Ops, just use it in a serverless fashion!
 - Cloud native
 - Zero lock-in
-- Global (Universal in our case!) scale  
-In this app both the CQL and REST interfaces have been utilized.
+- Global (Universal in our case!) scale
+
+In this repo both the CQL and REST interfaces have been utilized.
 
 ### IOT data provider
 The most important factor to measure is the quality of the oxygen in the spaceship!  
@@ -256,7 +257,8 @@ In this demo we'll use JMeter to simulate a data feed coming from an oxygen leve
 ## 5️⃣ Python Monitoring App
 > **TECHNOLOGY**  
 > ✅ Python  
-> ✅ Cassandra driver
+> ✅ Cassandra driver  
+> ✅ CQL
 
 All activities are relative to the `./python-monitoring` directory!
 
@@ -291,11 +293,11 @@ To ease the devops process, we make use of the wunderful https://serverless.com 
 As we're running a safety monitoring application we want latencies to be as low as possible. Therefore make sure you deploy your Serverless Functions to the same region where your Astra Database is running.
 
 After deploying the following endpoints will be available (where the URL is dynamic of course):
-  POST - https://f8nfklyolb.execute-api.eu-central-1.amazonaws.com/dev/createSchema
-  POST - https://f8nfklyolb.execute-api.eu-central-1.amazonaws.com/dev/addSensorReading
-  GET - https://f8nfklyolb.execute-api.eu-central-1.amazonaws.com/dev/getReading
-  POST - https://f8nfklyolb.execute-api.eu-central-1.amazonaws.com/dev/test/send
-  GET - https://f8nfklyolb.execute-api.eu-central-1.amazonaws.com/dev/monitorOxygen
+- POST - https://f8nfklyolb.execute-api.eu-central-1.amazonaws.com/dev/createSchema
+- POST - https://f8nfklyolb.execute-api.eu-central-1.amazonaws.com/dev/addSensorReading
+- GET - https://f8nfklyolb.execute-api.eu-central-1.amazonaws.com/dev/getReading
+- POST - https://f8nfklyolb.execute-api.eu-central-1.amazonaws.com/dev/test/send
+- GET - https://f8nfklyolb.execute-api.eu-central-1.amazonaws.com/dev/monitorOxygen
 
 These endpoints have been programmed using Node.js and are available in `handler.js`.
 
@@ -315,7 +317,7 @@ These endpoints have been programmed using Node.js and are available in `handler
 8. Configure the secrets of the Astra database in `serverless.yml`. Also configure your Cell Phone Number for recieving SMS messages:
 ```yaml
   environment:
-      ASTRA_SECURE_CONNECT_BUNDLE: ../terraform/secure_connect_bundle.zip
+      ASTRA_SECURE_CONNECT_BUNDLE: secure_connect_bundle.zip
       ASTRA_CLIENT_ID: <your-client-id>
       ASTRA_CLIENT_SECRET: <your-client-secret>
       ASTRA_DB_APPLICATION_TOKEN: <your-token>
@@ -368,3 +370,12 @@ Update `serverless.yml` and change `enabled: false` to `enabled: true` for funct
 Run `sls deploy` and sit back!
 
 ***Important:*** Make sure to change enabled back to false and run another deploy. Else the monitoring app keeps running which will incur cost!
+
+### Test the REST endpoint for the front-end
+Call the AWS Lambda rest endpoint for a specific rolling time window, a specific ship and a specific sensor:
+```sh
+curl -X POST -d '{"ship": "Starship Astra", "sensor": "oxygen"}' https://f8nfklyolb.execute-api.eu-central-1.amazonaws.com/dev/getReadings
+```
+
+## Front-end dashboard
+

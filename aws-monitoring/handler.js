@@ -223,6 +223,7 @@ async function monitorOxygen(ship) {
       };
     }
   } else {
+    // No rows retrieved
     console.log ('No data available!');
     return {
       statusCode: 201,
@@ -232,6 +233,62 @@ async function monitorOxygen(ship) {
       })
     };
   }
+}
+
+// Get the readings from the last 5 minutes
+async function getReadings(ship, sensor) {
+  // Current time
+  const time = new Date();
+  // Get the rolling window of a minute
+  var yyyymmddhhmm = [];
+  yyyymmddhhmm[0] = time.getFullYear() + ('0' + (time.getMonth()+1)).slice(-2) + ('0' + (time.getDate())).slice(-2) + ('0' + (time.getHours()+2)).slice(-2) + ('0' + (time.getMinutes())).slice(-2);
+  yyyymmddhhmm[1] = time.getFullYear() + ('0' + (time.getMonth()+1)).slice(-2) + ('0' + (time.getDate())).slice(-2) + ('0' + (time.getHours()+2)).slice(-2) + ('0' + (time.getMinutes()-1)).slice(-2);
+  yyyymmddhhmm[2] = time.getFullYear() + ('0' + (time.getMonth()+1)).slice(-2) + ('0' + (time.getDate())).slice(-2) + ('0' + (time.getHours()+2)).slice(-2) + ('0' + (time.getMinutes()-2)).slice(-2);
+  yyyymmddhhmm[3] = time.getFullYear() + ('0' + (time.getMonth()+1)).slice(-2) + ('0' + (time.getDate())).slice(-2) + ('0' + (time.getHours()+2)).slice(-2) + ('0' + (time.getMinutes()-3)).slice(-2);
+  yyyymmddhhmm[4] = time.getFullYear() + ('0' + (time.getMonth()+1)).slice(-2) + ('0' + (time.getDate())).slice(-2) + ('0' + (time.getHours()+2)).slice(-2) + ('0' + (time.getMinutes()-4)).slice(-2);
+
+  console.debug('Checking oxygen levels on space ship ' + ship + ' in the window', yyyymmddhhmm[0], 'until', yyyymmddhhmm[4]);
+
+  console.debug('Getting Astra client connection');
+  astraClient = await getAstraClient();
+
+  // Loop 5 times to get the 5 minute window
+  var result = [];
+  for (var i=0; i <= 4; i++) {
+    var query = {
+      params: {
+        where: {
+          yyyymmddhhmm: {
+            $eq: yyyymmddhhmm[i]
+          },
+          'ship': {
+            $eq: ship
+          },
+          sensor: {
+            $eq: 'oxygen'
+          }
+        }
+      }
+    };
+    console.debug('GET ' + restBasePath + ' with query: ' + JSON.stringify(query));
+    // REST GET command to query a table
+    const response = await astraClient.get(restBasePath, query);
+    console.debug("Response #" + i + ": " + JSON.stringify(response));
+    if (response.status == 200 && response.data.length > 0) {
+      // Yes! We have some results, construct the result
+      result = [].concat(result, response.data);
+    }
+  }
+  console.debug("Result: " + JSON.stringify(result));
+  // Make sure to add CORS headers to be able to call this endpoint from React
+  return {
+    statusCode: 200,
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Credentials': true,
+    },
+    body: JSON.stringify(result)
+  };
 }
 
 module.exports.createSchema = async () => {
@@ -256,4 +313,9 @@ module.exports.sendSMS = async (event) => {
 module.exports.monitorOxygen = async (event) => {
   const data = JSON.parse(event.body);
   return monitorOxygen(data.ship);
+};
+
+module.exports.getReadings = async (event) => {
+  const data = JSON.parse(event.body);
+  return getReadings(data.ship, data.sensor);
 };
