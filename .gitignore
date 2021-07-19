@@ -14,3 +14,4 @@ secure-connect-starship-enterprise.zip
 .terraform*
 terraform.tfstate*
 secure_connect_bundle.zip
+*.log

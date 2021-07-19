@@ -28,18 +28,18 @@
       <hashTree>
         <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="Connection settings" enabled="true">
           <collectionProp name="Arguments.arguments">
-            <elementProp name="ASTRA_DB_ID" elementType="Argument">
-              <stringProp name="Argument.name">ASTRA_DB_ID</stringProp>
+            <elementProp name="ASTRA_CLUSTER_ID" elementType="Argument">
+              <stringProp name="Argument.name">ASTRA_CLUSTER_ID</stringProp>
               <stringProp name="Argument.value">f70d2173-d52f-4d69-bee6-7789efbb131a</stringProp>
               <stringProp name="Argument.metadata">=</stringProp>
             </elementProp>
-            <elementProp name="ASTRA_DB_REGION" elementType="Argument">
-              <stringProp name="Argument.name">ASTRA_DB_REGION</stringProp>
+            <elementProp name="ASTRA_CLUSTER_REGION" elementType="Argument">
+              <stringProp name="Argument.name">ASTRA_CLUSTER_REGION</stringProp>
               <stringProp name="Argument.value">eu-central-1</stringProp>
               <stringProp name="Argument.metadata">=</stringProp>
             </elementProp>
-            <elementProp name="ASTRA_DB_APPLICATION_TOKEN" elementType="Argument">
-              <stringProp name="Argument.name">ASTRA_DB_APPLICATION_TOKEN</stringProp>
+            <elementProp name="ASTRA_AUTHORIZATION_TOKEN" elementType="Argument">
+              <stringProp name="Argument.name">ASTRA_AUTHORIZATION_TOKEN</stringProp>
               <stringProp name="Argument.value">AstraCS:qRiZFbYULduQYOlqOPsJyGxR:660ba64e73ddfe5ccda71a38c48847ab2f4cc53944f6a12f63fe2979eec2a4c1</stringProp>
               <stringProp name="Argument.metadata">=</stringProp>
             </elementProp>
@@ -58,7 +58,7 @@
             </elementProp>
             <elementProp name="" elementType="Header">
               <stringProp name="Header.name">x-cassandra-token</stringProp>
-              <stringProp name="Header.value">${ASTRA_DB_APPLICATION_TOKEN}</stringProp>
+              <stringProp name="Header.value">${ASTRA_AUTHORIZATION_TOKEN}</stringProp>
             </elementProp>
           </collectionProp>
         </HeaderManager>
@@ -83,7 +83,7 @@ ${__setProperty(yyyymmddhhmm, ${__time(yyyyMMddHHmm)}, False)}&#xd;
               </elementProp>
             </collectionProp>
           </elementProp>
-          <stringProp name="HTTPSampler.domain">${ASTRA_DB_ID}-${ASTRA_DB_REGION}.apps.astra.datastax.com</stringProp>
+          <stringProp name="HTTPSampler.domain">${ASTRA_CLUSTER_ID}-${ASTRA_CLUSTER_REGION}.apps.astra.datastax.com</stringProp>
           <stringProp name="HTTPSampler.port">443</stringProp>
           <stringProp name="HTTPSampler.protocol">https</stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>

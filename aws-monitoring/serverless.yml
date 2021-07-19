@@ -8,10 +8,15 @@ provider:
   deploymentBucket:
     name: astra-starship
   environment:
+      # Used when you connect through the Secure Connect Nundle
       ASTRA_SECURE_CONNECT_BUNDLE: secure_connect_bundle.zip
       ASTRA_CLIENT_ID: qRiZFbYULduQYOlqOPsJyGxR
       ASTRA_CLIENT_SECRET: 9EucT2huQwGrYT+DmAI5cgkjzpl3keC,6.2Kcz8C_dPooX39jC9aRkfhKLz6UWdOO_Cd+Nc1cJZaX1BxCLWlNX3wsDHU_N-d-FgUJfw7T_-8M_m8oQ3UNdp56nicCbAW
+      # Used when you connect through the REST APIs
+      ASTRA_DB_ID: f70d2173-d52f-4d69-bee6-7789efbb131a
+      ASTRA_DB_REGION: eu-central-1
       ASTRA_DB_APPLICATION_TOKEN: AstraCS:qRiZFbYULduQYOlqOPsJyGxR:660ba64e73ddfe5ccda71a38c48847ab2f4cc53944f6a12f63fe2979eec2a4c1
+      # The Cell Phone Number for alerts
       MONITOR_SMS_NUMBER: +31638507567
   iamRoleStatements:
   - Effect: "Allow"
@@ -39,7 +44,7 @@ functions:
     events: 
       - http:
           path: getReading
-          method: get
+          method: post
           cors: true
   sendSMS:
     handler: handler.sendSMS
@@ -53,7 +58,7 @@ functions:
     events:
       - http:
           path: monitorOxygen
-          method: get
+          method: post
           cors: true
       - schedule:
           rate: rate(1 minute)

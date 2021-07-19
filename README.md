@@ -304,7 +304,7 @@ These endpoints have been programmed using Node.js and are available in `handler
 ```
 9. Install Node.js dependencies
 ```sh
-npm install cassandra-driver aws-sdk
+npm install @astrajs/collections @astrajs/rest@0.0.12 aws-sdk --save
 ```
 10. Deploy the serverless functions running `sls deploy`.
 
@@ -326,9 +326,9 @@ curl -X POST -d '{"yyyymmddhhmm": "202008161210", "updated": "2020-08-16T12:10:3
 ```
 
 ### Test querying the test data
-Call the AWS Lambda rest endpoint (some variables haven been hardcoded for the sake of time):
+Call the AWS Lambda rest endpoint for a specific rolling time window, a specific ship and a specific sensor:
 ```sh
-curl -X GET https://f8nfklyolb.execute-api.eu-central-1.amazonaws.com/dev/getReading
+curl -X POST -d '{"yyyymmddhhmm": "202008161210", "ship": "Starship Astra", "sensor": "oxygen"}' https://f8nfklyolb.execute-api.eu-central-1.amazonaws.com/dev/getReading
 ```
 
 ### Test sending an SMS
@@ -341,10 +341,11 @@ curl -X POST -d '{"receiver": "+31638507567", "sender": "Starship", "message": "
 Make sure JMeter is firing the endpoint to simulate the oxygen sensor. Also update `MONITOR_SMS_NUMBER` in `serverless.yml` to match your cell phone number.  
 Call the rest endpoint (some variables haven been hardcoded for the sake of time):
 ```sh
-curl -X GET https://2qx7yo740c.execute-api.eu-west-1.amazonaws.com/dev/monitorOxygen
+curl -X POST -d '{"ship": "Starship Astra"}' https://f8nfklyolb.execute-api.eu-central-1.amazonaws.com/dev/monitorOxygen
 ```
 
 ### Operationalize the monitoring process
-Update `serverless.yml` and change `enabled: false` to `enabled: true ` for function `monitorOxygen`. Also update `MONITOR_SMS_NUMBER` in `serverless.yml` to match your cell phone number.  
-Run `sls deploy` and sit back!  
+Update `serverless.yml` and change `enabled: false` to `enabled: true` for function `monitorOxygen`. Also make sure to update `MONITOR_SMS_NUMBER` in `serverless.yml` to match your cell phone number.  
+Run `sls deploy` and sit back!
+
 ***Important:*** Make sure to change enabled back to false and run another deploy. Else the monitoring app keeps running which will incur cost!

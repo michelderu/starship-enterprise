@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "description": "Example shows how to build a Cassandra REST API with AWS Lambda HTTP Endpoints in Node.js",
   "dependencies": {
+    "@astrajs/collections": "^0.1.0",
+    "@astrajs/rest": "^0.0.12",
     "aws-sdk": "^2.948.0",
     "cassandra-driver": "^4.6.3"
   }
