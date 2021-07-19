@@ -74,7 +74,7 @@ LIMIT 1;
 This will retrieve all oxygen reading from the current rolling minut window, with the oxygen value sorted in an ascending order. So the smallest value will be first, easily allowing to check if it's < 18. Limiting to 1 gives us the number we're interested in.
 
 ## 3️⃣ Setting up Astra
-> **TAGS**  
+> **TECHNOLOGY**  
 > ✅ Terraform  
 > ✅ ASTRA REST API
 
@@ -227,9 +227,9 @@ Run: `./query.sh`. Take a look at the embedded REST call.
 Take note of the automatic order done by the cluster!
 
 ## 4️⃣ Simulate the oxygen IOT device
-TAGS
-- [x] JMeter
-- [x] ASTRA REST API
+> **TECHNOLOGY**  
+> ✅ JMeter  
+> ✅ ASTRA REST API
 
 ### IOT data generation
 In 98% of the time we generate a normal O value of 18-22, the other 2% we generate outliers from 14-17.  
@@ -254,9 +254,9 @@ In this demo we'll use JMeter to simulate a data feed coming from an oxygen leve
 3. Hit the run button to start the simulation that loads IOT data into Astra. JMeter will ingest a value every second for a period of 5 minutes (enough for testing).
 
 ## 5️⃣ Python Monitoring App
-TAGS
-- [x] Python
-- [x] Cassandra driver
+> **TECHNOLOGY**  
+> ✅ Python  
+> ✅ Cassandra driver
 
 All activities are relative to the `./python-monitoring` directory!
 
@@ -274,11 +274,13 @@ Make sure JMeter is firing the endpoint to simulate the oxygen sensor.
 Now run `./run_monitoring.sh` and see the magic happen.
 
 ## 6️⃣ AWS cloud-native Monitoring App
-TAGS
-- [x] AWS S3
-- [x] AWS Lambda
-- [x] AWS SNS (Simple Notification Service)
-- [x] ASTRA REST API
+> **TECHNOLOGY**  
+> ✅ AWS S3  
+> ✅ AWS Lambda  
+> ✅ AWS SNS (Simple Notification Service)  
+> ✅ ASTRA REST API  
+> ✅ Node.js  
+> ✅ Curl
 
 All activities are relative to the `./aws-monitoring` directory!
 
