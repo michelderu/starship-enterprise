@@ -74,9 +74,9 @@ LIMIT 1;
 This will retrieve all oxygen reading from the current rolling minut window, with the oxygen value sorted in an ascending order. So the smallest value will be first, easily allowing to check if it's < 18. Limiting to 1 gives us the number we're interested in.
 
 ## 3️⃣ Setting up Astra
-TAGS
-- [x] Terraform
-- [x] ASTRA REST API
+> **TAGS**
+> ✅ Terraform  
+> ✅ ASTRA REST API
 
 For purposes of showing off, we're going to utilize several methods for setting up the Astra database.
 1. First we'll use [Terraform](https://www.terraform.io) using the [DataStax Astra Provider](https://registry.terraform.io/providers/datastax/astra/latest/docs) to create the database in the region of our choice.
