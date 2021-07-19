@@ -377,5 +377,8 @@ Call the AWS Lambda rest endpoint for a specific rolling time window, a specific
 curl -X POST -d '{"ship": "Starship Astra", "sensor": "oxygen"}' https://f8nfklyolb.execute-api.eu-central-1.amazonaws.com/dev/getReadings
 ```
 
-## Front-end dashboard
+## 7️⃣ Front-end dashboard
+> **TECHNOLOGY**  
+> ✅ Node.js  
+> ✅ React  
 
