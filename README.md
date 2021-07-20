@@ -1,4 +1,23 @@
 # 🚀 Starship Enterprise IOT Demo 🚀
+
+## Technology used
+This demo is a technology showcase about the following technology:
+
+![DataStax Astra](images/astra.png)
+![Terraform](images/terraform.jpg)
+![REST API](images/rest.png)
+![Apache JMeter](images/jmeter.png)
+![Python](images/python.png)
+![Apache Cassandra](images/cassandra.png)
+![CQL](images/cql.png)
+![AWS S3](images/s3.png)
+![AWS Lambda](images/lambda.png)
+![AWS SNS](images/sns.png)
+![Node.js](images/nodejs.png)
+![React](images/react.png)
+![CURL](images/curl.png)
+
+## Narrative
 Welcome to the Starship Enterprise Fleet! And congratulations, you're the Safety Manager responsible for the safety of all personnel.  
 The single most important safety issue is the quality of oxygen. No oxygen == No people!  
 In order to maximise safety on each ship an extensive monitoring system has been implemented by you for life support. This monitoring system takes information from thousands of systems and stores it securely in a scalable Cassandra architecture.  
@@ -6,7 +25,7 @@ Cassandra has been choosen because of it's zero-downtime capabilities and it's l
 
 The ultime goale is to create a full serverless application that utilizes the serverless DataStax Astra database and AWS Lambda functions as follows:
 
-![AWS Architecture Goal](diagrams/aws-architecture.png)
+![AWS Architecture Goal](images/aws-architecture.png)
 
 ## 1️⃣ Components in the demo
 ### Database
