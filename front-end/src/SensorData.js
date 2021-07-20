@@ -32,6 +32,9 @@ class SensorData extends Component{
 
   // Set up a timer for this component to refresh every 30 seconds
   componentDidMount() {
+    // Do an initial data fetch
+    this.callApi();
+    // Configure the timer
     this.timerID = setInterval(
       () => this.tick(),
       30000
@@ -55,6 +58,9 @@ class SensorData extends Component{
 
         <div class="row"><h3>Oxygen sensor data</h3></div>
         <div class="row">
+          <div class="col text-right"><small>Last updated: {Date()}</small></div>
+        </div>
+        <div class="row">
           <div class="col-md-12">
             <table class="table">
               <thead>
@@ -76,7 +82,7 @@ class SensorData extends Component{
             </table>
           </div>
         </div>
-        <div class="row">(Rolling window of last 5 minutes, updates every second. Red lines mark alerts!)</div>
+        <div class="row">(Rolling window of last 5 minutes, updates every 30 seconds. Red lines mark alerts!)</div>
       </div>
       );
   }

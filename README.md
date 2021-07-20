@@ -407,6 +407,8 @@ curl -X POST -d '{"ship": "Starship Astra", "sensor": "oxygen"}' https://f8nfkly
 ### Design
 The front-end is based on [React](https://reactjs.org) which is a great javascript library for dynamic front-ends. [Bootstrap](https://getbootstrap.com/) is used to make the dashboard responsive and available on any device. The react code runs on top of [Node.js](https://nodejs.org/) and is broken up in several components for separation of concern.
 
+![Dashboard](images/dashboard.png)
+
 The main component is the `SensorData` component. It's only responsibility is to show a rolling 5 minute window of readings and pointing out alert values. Functionality:
 - Build the UI part of the component
 - Ticker schedule to update the component every 30 seconds
