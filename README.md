@@ -1,7 +1,7 @@
 # 🚀 Starship Enterprise IOT Demo 🚀
 
 ## Technology used
-This demo is a technology showcase about the following technology:
+This demo is a technology showcase with the following technology:
 
 ![DataStax Astra](images/astra.png)
 ![Terraform](images/terraform.jpg)
