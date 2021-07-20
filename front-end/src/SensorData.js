@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import './App.css';
 
-class App extends Component{
+class SensorData extends Component{
   constructor(props) {
     super(props);
     this.state = { 
@@ -31,21 +30,38 @@ class App extends Component{
     .catch(err => err);
   }
 
+  // Set up a timer for this component to refresh every 30 seconds
   componentDidMount() {
+    this.timerID = setInterval(
+      () => this.tick(),
+      30000
+    );
+  }
+
+  // Clear the timer
+  componentWillUnmount() {
+    clearInterval(this.timerID);
+  }
+
+  // Update the values of this component
+  tick() {
     this.callApi();
   }
 
   render() {
       return (
-        <div class="container-fluid">
+
+      <div class="container px-4 py-5">
+
+        <div class="row"><h3>Oxygen sensor data</h3></div>
         <div class="row">
           <div class="col-md-12">
             <table class="table">
               <thead>
                 <tr>
-                  <th>Name</th>
-                  <th>Date</th>
-                  <th>Priority</th>
+                  <th>Space ship</th>
+                  <th>Timestamp</th>
+                  <th>Oxygen (ppm)</th>
                 </tr>
               </thead>
               <tbody>
@@ -60,9 +76,10 @@ class App extends Component{
             </table>
           </div>
         </div>
+        <div class="row">(Rolling window of last 5 minutes, updates every second. Red lines mark alerts!)</div>
       </div>
       );
   }
 }
 
-export default App;
+export default SensorData;

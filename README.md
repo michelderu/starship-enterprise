@@ -1,7 +1,7 @@
 # 🚀 Starship Enterprise IOT Demo 🚀
 
 ## Technology used
-This demo is a technology showcase with the following technology:
+This demo is a technology showcase around [DataStax Astra](https://astra.datastax.com) with the following technology:
 
 ![DataStax Astra](images/astra.png)
 ![Terraform](images/terraform.jpg)
@@ -14,7 +14,7 @@ This demo is a technology showcase with the following technology:
 ![AWS Lambda](images/lambda.png)
 ![AWS SNS](images/sns.png)
 ![Node.js](images/nodejs.png)
-![React](images/react.png)
+![React.js](images/react.png)
 ![CURL](images/curl.png)
 
 ## Narrative
@@ -50,10 +50,11 @@ Normal oxygen levels measure 18-22 ppm. Everything below 17 ppm activates an ale
 Because the maintenance personnel is very actively working throughout the whole ship, we have to make sure they get alerted as soon as action has to be taken. 
 #### AWS cloud-native app 
 To keep in-line with the cloud-based Astra solution, we utlize the following cloud-native solutions on AWS:
-- Lambda functions to create a true severless application.
-- Additionally the Simple Notification Service from AWS is used to inform service employees.
-- Finally Lambda Scheduled Events to run the service every minute.  
-In order to package the application nicely in a devops environment https://serverless.com has been used.
+- AWS Lambda functions to create a true severless application.
+- Additionally the AWS Simple Notification Service is used to inform service employees.
+- Finally AWS Lambda Scheduled Events to run the service every minute.  
+In order to package the application nicely in a devops environment [Serverless]https://serverless.com has been used.
+
 #### Python app
 For reference, and showing the flexibility of the Datastax platform, there is also a Python app that monitors the sensor information and triggers alerts when needed.
 
@@ -96,7 +97,7 @@ This will retrieve all oxygen reading from the current rolling minut window, wit
 ## 3️⃣ Setting up Astra
 > **TECHNOLOGY**  
 > ✅ Terraform  
-> ✅ ASTRA REST API
+> ✅ Astra REST API
 
 For purposes of showing off, we're going to utilize several methods for setting up the Astra database.
 1. First we'll use [Terraform](https://www.terraform.io) using the [DataStax Astra Provider](https://registry.terraform.io/providers/datastax/astra/latest/docs) to create the database in the region of our choice.
@@ -249,7 +250,7 @@ Take note of the automatic order done by the cluster!
 ## 4️⃣ Simulate the oxygen IOT device
 > **TECHNOLOGY**  
 > ✅ JMeter  
-> ✅ ASTRA REST API
+> ✅ Astra REST API
 
 ### IOT data generation
 In 98% of the time we generate a normal O value of 18-22, the other 2% we generate outliers from 14-17.  
@@ -299,7 +300,7 @@ Now run `./run_monitoring.sh` and see the magic happen.
 > ✅ AWS S3  
 > ✅ AWS Lambda  
 > ✅ AWS SNS (Simple Notification Service)  
-> ✅ ASTRA REST API  
+> ✅ Astra REST API  
 > ✅ Node.js  
 > ✅ Curl
 
@@ -396,8 +397,30 @@ Call the AWS Lambda rest endpoint for a specific rolling time window, a specific
 curl -X POST -d '{"ship": "Starship Astra", "sensor": "oxygen"}' https://f8nfklyolb.execute-api.eu-central-1.amazonaws.com/dev/getReadings
 ```
 
-## 7️⃣ Front-end dashboard
+## 7️⃣ Monitoring Dashboard
 > **TECHNOLOGY**  
 > ✅ Node.js  
 > ✅ React  
+> ✅ Bootstrap  
+> ✅ AWS Lambda
 
+### Design
+The front-end is based on [React](https://reactjs.org) which is a great javascript library for dynamic front-ends. [Bootstrap](https://getbootstrap.com/) is used to make the dashboard responsive and available on any device. The react code runs on top of [Node.js](https://nodejs.org/) and is broken up in several components for separation of concern.
+
+The main component is the `SensorData` component. It's only responsibility is to show a rolling 5 minute window of readings and pointing out alert values. Functionality:
+- Build the UI part of the component
+- Ticker schedule to update the component every 30 seconds
+- Call the /getReadings REST endpoint on the AWS Lambda middle layer
+
+### Run the front-end
+First you need to update the URL for the /getReadings API that runs on AWS Lambda because the URL is dynamic. Edit `front-end/src/SendorData.js` and replace the URL on line `27`.
+
+Then make sure you feed values into the database by simulating load from the oxygen sensor. For this start `apache-jmeter-5.3/bin/jmeter.sh` and run `Oxygen Filter Simulation.jmx`.  
+
+Lastly install required modules and start the server:
+```sh
+cd front-end
+npm install
+npm start
+```
+Your browser should open on http://localhost:3000.
