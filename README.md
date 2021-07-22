@@ -21,7 +21,9 @@ This demo is a functionality and technology showcase around [DataStax Astra](htt
 ## Narrative
 Welcome to the Starship Enterprise Fleet! And congratulations, you're the Safety Manager responsible for the safety of all personnel.  
 The single most important safety issue is the quality of oxygen. No oxygen == No people!  
-In order to maximise safety on each ship an extensive monitoring system has been implemented by you for life support. This monitoring system takes information from thousands of systems and stores it securely in the serverless elastically scalable [DataStax Astra](https://astra.datastax.com) database.
+In order to maximise safety on each ship an extensive monitoring system has been implemented by you for life support.
+
+The monitoring system takes information from thousands of sensors and stores it securely in the serverless elastically scalable [DataStax Astra](https://astra.datastax.com) database.
 Astra is a managed Cassandra cloud-agnostics database and has been choosen because of it's zero-downtime capabilities. It's lightning fast write operations allowing for secure storage of all measurements of all IOT sensors. And as we're not just talking Global scale, but Universal scale, we need a database that can scale with us!
 
 The ultime goal here is to create a full serverless application that utilizes the serverless DataStax Astra database and AWS Lambda functions as follows:
