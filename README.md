@@ -1,9 +1,10 @@
 # 🚀 Starship Enterprise IOT Demo 🚀
 
 ## Technology used
-This demo is a technology showcase around [DataStax Astra](https://astra.datastax.com) with the following technology:
+This demo is a functionality and technology showcase around [DataStax Astra](https://astra.datastax.com) with the following technology:
 
 ![DataStax Astra](images/astra.png)
+![Stargate.io](images/stargate.png)
 ![Terraform](images/terraform.jpg)
 ![REST API](images/rest.png)
 ![Apache JMeter](images/jmeter.png)
@@ -20,22 +21,22 @@ This demo is a technology showcase around [DataStax Astra](https://astra.datasta
 ## Narrative
 Welcome to the Starship Enterprise Fleet! And congratulations, you're the Safety Manager responsible for the safety of all personnel.  
 The single most important safety issue is the quality of oxygen. No oxygen == No people!  
-In order to maximise safety on each ship an extensive monitoring system has been implemented by you for life support. This monitoring system takes information from thousands of systems and stores it securely in a scalable Cassandra architecture.  
-Cassandra has been choosen because of it's zero-downtime capabilities and it's lightning fast write operations allowing for secure storage of all measurements of all IOT sensors.
+In order to maximise safety on each ship an extensive monitoring system has been implemented by you for life support. This monitoring system takes information from thousands of systems and stores it securely in the serverless elastically scalable [DataStax Astra](https://astra.datastax.com) database.
+Astra is a managed Cassandra cloud-agnostics database and has been choosen because of it's zero-downtime capabilities. It's lightning fast write operations allowing for secure storage of all measurements of all IOT sensors. And as we're not just talking Global scale, but Universal scale, we need a database that can scale with us!
 
-The ultime goale is to create a full serverless application that utilizes the serverless DataStax Astra database and AWS Lambda functions as follows:
+The ultime goal here is to create a full serverless application that utilizes the serverless DataStax Astra database and AWS Lambda functions as follows:
 
 ![AWS Architecture Goal](images/aws-architecture.png)
 
 ## 1️⃣ Components in the demo
 ### Database
 The database being used is deployed on the Datastax Astra DBaaS offering because of:
-- No Ops, just use it in a serverless fashion!
+- No Ops, No Scaling, just use it in a serverless fashion!
 - Cloud native
 - Zero lock-in
 - Global (Universal in our case!) scale
 
-In this repo both the CQL and REST interfaces have been utilized.
+In this repo both the CQL and Stargate.io REST interfaces have been utilized.
 
 ### IOT data provider
 The most important factor to measure is the quality of the oxygen in the spaceship!  
@@ -53,10 +54,14 @@ To keep in-line with the cloud-based Astra solution, we utlize the following clo
 - AWS Lambda functions to create a true severless application.
 - Additionally the AWS Simple Notification Service is used to inform service employees.
 - Finally AWS Lambda Scheduled Events to run the service every minute.  
-In order to package the application nicely in a devops environment [Serverless]https://serverless.com has been used.
+In order to package the application nicely in a devops environment [Serverless]https://serverless.com has been used.  
+The serverless functions call the Astra Database uzing Stargate APIs.
 
 #### Python app
 For reference, and showing the flexibility of the Datastax platform, there is also a Python app that monitors the sensor information and triggers alerts when needed.
+
+### Dashboarding
+Operations needs a lot of information about the fleet as well. For them we've created a Responsive Web Application that provides a rolling window of 5 minutes if sensor information.
 
 ## 2️⃣ Data model design
 ### Keyspace
@@ -423,6 +428,6 @@ cd front-end
 npm install
 npm start
 ```
-Your browser should open on http://localhost:3000 ans look like this:
+Your browser should open on http://localhost:3000 and look like this:
 
 ![Dashboard](images/dashboard.png)
